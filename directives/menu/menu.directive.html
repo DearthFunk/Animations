@@ -1,0 +1,27 @@
+<div class="menuContainer verticalScrollBar">
+
+	<div class="section">INPUT: NONE</div>
+	<div class="animation"
+	     data-ng-click="changeAnimation(animation)"
+	     data-ng-class="{active: animation.name === animationService.selectedAnimation.name}"
+	     data-ng-repeat="animation in animationService.animations | orderBy: 'name' | filter:{'input':  INPUT_TYPE.NONE}:true">
+		{{animation.name}}
+	</div>
+
+	<div class="section">INPUT: KEYBOARD/MOUSE</div>
+	<div class="animation"
+	     data-ng-click="changeAnimation(animation)"
+	     data-ng-class="{active: animation.name === animationService.selectedAnimation.name}"
+	     data-ng-repeat="animation in animationService.animations | orderBy: 'name' | filter:{'input':  INPUT_TYPE.KM}:true">
+		{{animation.name}}
+	</div>
+
+	<div class="section">INPUT: MUSIC</div>
+	<div class="animation"
+	     data-ng-click="changeAnimation(animation)"
+	     data-ng-class="{active: animation.name === animationService.selectedAnimation.name}"
+	     data-ng-repeat="animation in animationService.animations | orderBy: 'name' | filter:{'input':  INPUT_TYPE.MUSIC}:true">
+		{{animation.name}}
+	</div>
+
+</div>
