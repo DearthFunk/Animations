@@ -30,17 +30,13 @@
 		function draw(ctx, state) {
 
 			var db = audioService.getAverageDB();
-			spinnerRotate === 360 ? spinnerRotate = 0 : spinnerRotate += parseFloat(speed);
+			spinnerRotate === 360 ? spinnerRotate = 0 : spinnerRotate += speed;
 			spinnerRotate += (db/parseFloat(dbSpeedImpact));
-
+			spinnerRotate = spinnerRotate % Math.PI;
+			console.log(spinnerRotate);
 			for (var circle = 0; circle <= totalCircles; circle++) {
 
 				for (var i = 0; i < linesPerLayer; i++) {
-					console.log(circle, i);
-					ctx.beginPath();
-					ctx.strokeStyle = genColors.convert.rgba(color,1-(circle/totalCircles));
-					ctx.lineWidth = lineThickness;
-					ctx.beginPath();
 
 					var rotateValue = circle % 2 == 0 ? spinnerRotate*-1 : spinnerRotate;
 
@@ -50,10 +46,14 @@
 					var startY = state.yCenter + (innerRadius + circlePadding + dbAdjust) * Math.sin(angle);
 					var endX   = state.xCenter  + (innerRadius - (circlePadding*2) + circleSize + dbAdjust) * Math.cos(angle);
 					var endY   = state.yCenter + (innerRadius - (circlePadding*2) + circleSize + dbAdjust) * Math.sin(angle);
+
+					ctx.beginPath();
+					ctx.strokeStyle = genColors.convert.rgba(color,1-(circle/totalCircles));
+					ctx.lineWidth = lineThickness;
 					ctx.moveTo(startX,startY);
 					ctx.lineTo(endX,endY);
 					ctx.stroke();
-
+					ctx.closePath();
 
 				}
 
