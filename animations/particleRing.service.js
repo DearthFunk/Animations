@@ -43,6 +43,7 @@
 		}
 		
 		function draw(ctx, state) {
+			ctx.clearRect(0,0,state.w, state.h);
 			var db = audioService.getAverageDB() * dbIntensity / 10;
 			for (var x = 0; x < layers; x++) {
 				for (var i = 0; i < total; i++) {

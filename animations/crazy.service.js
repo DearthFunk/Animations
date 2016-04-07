@@ -60,6 +60,7 @@
 		}
 
 		function draw(ctx, state) {
+			ctx.clearRect(0,0,state.w, state.h);
 			var c1 = false;
 			var c2 = false;
 			for (var y = 0; y < rows; y++) {

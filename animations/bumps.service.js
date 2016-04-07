@@ -27,6 +27,7 @@
 		//////////////////////////////////////////////////
 
 		function draw(ctx, state) {
+			ctx.clearRect(0,0,state.w, state.h);
 			ctx.lineWidth = 1;
 			var freqArray = audioService.getFreqArray(50);
 			var chunkWidth = state.xCenter/freqArray.length;

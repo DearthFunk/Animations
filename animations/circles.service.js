@@ -24,6 +24,7 @@
 		//////////////////////////////////////////////////
 
 		function draw(ctx, state) {
+			ctx.clearRect(0,0,state.w, state.h);
 			circleOuterSpinnerAngle += 0.06;
 			var circleHoverAngle = Math.atan2(state.mouseY - state.yCenter, state.mouseX - state.xCenter);
 			var circleRotatorX = Math.cos(circleHoverAngle)*state.mainRadius + state.xCenter;

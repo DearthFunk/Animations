@@ -46,6 +46,7 @@
 		}
 
 		function draw(ctx, state) {
+			ctx.clearRect(0,0,state.w, state.h);
 			rotate+= 0.1;
 			for (var lvl = 1; lvl < squaresLevels+1; lvl++ ) {
 				ctx.strokeStyle = lvl == squaresLevels ? 'rgba(255,100,100,0.2)' : squaresLevelColors[lvl];

@@ -62,6 +62,7 @@
 		}
 
 		function draw(ctx, state) {
+			ctx.clearRect(0,0,state.w, state.h);
 			var db = audioService.getAverageDB();
 			var sideLengthMAIN = parseFloat(size);
 

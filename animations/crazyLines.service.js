@@ -38,6 +38,7 @@
 		}
 
 		function draw(ctx, state) {
+			ctx.clearRect(0,0,state.w, state.h);
 			for (var y = 0; y < rows; y++) {
 				if (angular.isUndefined(points[y])) {points.push([]);}
 				for (var x = 0; x < columns; x++) {

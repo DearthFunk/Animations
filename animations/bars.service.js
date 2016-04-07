@@ -21,6 +21,7 @@
 		//////////////////////////////////////////////////
 
 		function draw(ctx, state) {
+			ctx.clearRect(0,0,state.w, state.h);
 			var freqArray = audioService.getFreqArray();
 			var section = state.w / (audioService.audioBufferSize/2);
 			var spacer = section * 0.2;

@@ -31,6 +31,7 @@
 		}
 
 		function draw(ctx, state) {
+			ctx.clearRect(0,0,state.w, state.h);
 			ctx.fillStyle = '#FFFFFF';
 			ctx.strokeStyle = '#FF0000';
 			ringClusterAngle += state.mouseDistanceFromCenter/20000;

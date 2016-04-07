@@ -35,6 +35,7 @@
 		}
 
 		function draw(ctx, state) {
+			ctx.clearRect(0,0,state.w, state.h);
 			for (var i = 0; i < total; i++) {
 				if (angular.isUndefined(spiralParticles[i])) {
 					spiralParticles.push( service.createSpiralParticle(state) );

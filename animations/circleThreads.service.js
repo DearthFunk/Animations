@@ -35,7 +35,7 @@
 		}
 		
 		function draw(ctx, state) {
-
+			ctx.clearRect(0,0,state.w, state.h);
 			var freqArray = audioService.getFreqArray(100);
 			var freqIndex = Math.floor(freqArray.length /columns);
 			var chunkWidth = Math.floor((state.w - (paddingSides*2) ) /columns);

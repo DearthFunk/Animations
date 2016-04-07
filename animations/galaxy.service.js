@@ -44,6 +44,7 @@
 		}
 
 		function draw(ctx, state) {
+			ctx.clearRect(0,0,state.w, state.h);
 			for (i =0; i < galaxyBursts.length; i++) {
 				var burst = galaxyBursts[i];
 				burst.r += burst.speed;

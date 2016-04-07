@@ -50,7 +50,7 @@
 		}
 		
 		function draw(ctx, state) {
-
+			ctx.clearRect(0,0,state.w, state.h);
 			var dB = audioService.getAverageDB();
 
 			for (var i = 0; i < fountainCircles.length; i++) {

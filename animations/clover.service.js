@@ -26,7 +26,7 @@
 		//////////////////////////////////////////////////
 
 		function draw(ctx, state) {
-
+			ctx.clearRect(0,0,state.w, state.h);
 			for (var i = 0; i < numDots; i++) {
 				angle += speed;
 				angle = angle % (Math.PI*2);

@@ -21,6 +21,7 @@
 		//////////////////////////////////////////////////
 
 		function draw(ctx, state) {
+			ctx.clearRect(0,0,state.w, state.h);
 			var freqData = audioService.getSmallArray(spacing);
 			ctx.beginPath();
 			ctx.lineWidth = thickness;

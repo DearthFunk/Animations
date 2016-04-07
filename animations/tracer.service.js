@@ -43,6 +43,7 @@
 
 
 		function draw(ctx, state) {
+			ctx.clearRect(0,0,state.w, state.h);
 			var spacing = state.h / 40;
 			tracerCircleAddSpacing += state.mouseDown ? -0.3 : 0.3;
 			if (tracerCircleAddSpacing > spacing) {tracerCircleAddSpacing = 0}

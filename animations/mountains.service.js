@@ -19,6 +19,7 @@
 		//////////////////////////////////////////////////
 
 		function draw(ctx, state) {
+			ctx.clearRect(0,0,state.w, state.h);
 			var freqArray = audioService.getFreqArray();
 
 			ctx.beginPath();

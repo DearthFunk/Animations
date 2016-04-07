@@ -39,6 +39,7 @@
 			}
 		}
 		function draw(ctx, state) {
+			ctx.clearRect(0,0,state.w, state.h);
 			if (!state.mouseDown && stopperSize > stopperSizeMin) {stopperSize-= 0.6;}
 			if (stopperSize < 0) {stopperSize = 0;}
 

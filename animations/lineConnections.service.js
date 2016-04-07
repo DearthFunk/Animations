@@ -41,6 +41,7 @@
 		}
 
 		function draw(ctx, state) {
+			ctx.clearRect(0,0,state.w, state.h);
 			for (i = 0; i < galaxyStars.length; i++) {
 				var star = galaxyStars[i];
 

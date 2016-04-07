@@ -25,6 +25,7 @@
 		//////////////////////////////////////////////////
 
 		function draw(ctx, state) {
+			ctx.clearRect(0,0,state.w, state.h);
 			var freqArray = audioService.getFreqArray();
 			freqArray.splice(freqArray.length-150,150);
 			var freqIndex = Math.floor(freqArray.length / columns);

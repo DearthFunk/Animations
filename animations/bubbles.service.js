@@ -37,6 +37,7 @@
 		}
 
 		function draw(ctx, state) {
+			ctx.clearRect(0,0,state.w, state.h);
 			ctx.lineWidth = 1;
 			ctx.strokeStyle = '#000000';
 			for (var i = 0; i < bubbles.length; i++) {

@@ -82,8 +82,6 @@
 		}
 
 		function drawAnimation() {
-			ctx.clearRect(0,0,$scope.state.w, $scope.state.h);
-
 			//set globalComposition
 			if(animationService.selectedAnimation.globalCompositeOperation !== ctx.globalCompositeOperation) {
 				ctx.globalCompositeOperation = animationService.selectedAnimation.globalCompositeOperation;

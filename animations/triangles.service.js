@@ -24,7 +24,7 @@
 		//////////////////////////////////////////////////
 
 		function draw(ctx, state) {
-
+			ctx.clearRect(0,0,state.w, state.h);
 			rotation += speed;
 			var rectX = numW * size /2;
 			var rectY = numH * size /2;

@@ -23,6 +23,7 @@
 		//////////////////////////////////////////////////
 
 		function draw(ctx, state) {
+			ctx.clearRect(0,0,state.w, state.h);
 			var freqData = audioService.getFreqArray();
 			var dB = Math.round( (audioService.getAverageDB() / 75) * 10) / 10;
 

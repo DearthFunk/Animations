@@ -45,7 +45,7 @@
 		}
 		
 		function draw(ctx, state) {
-
+			ctx.clearRect(0,0,state.w, state.h);
 			var dB = audioService.getAverageDB();
 			var center = state.yCenter;
 

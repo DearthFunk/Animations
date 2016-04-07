@@ -39,6 +39,7 @@
 		}
 		
 		function draw(ctx, state) {
+			ctx.clearRect(0,0,state.w, state.h);
 			var dbLevel = audioService.getAverageDB();
 			var freqArray = audioService.getFreqArray();
 			freqArray.splice(freqArray.length-200,200);

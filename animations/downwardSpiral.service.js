@@ -23,7 +23,7 @@
 		//////////////////////////////////////////////////
 
 		function draw(ctx, state) {
-
+			ctx.clearRect(0,0,state.w, state.h);
 			if (stereoSplit) {
 				var freqArrayL = audioService.getFreqArrayLeft();
 				var freqArrayR = audioService.getFreqArrayRight();

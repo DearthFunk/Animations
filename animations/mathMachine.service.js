@@ -23,6 +23,7 @@
 		//////////////////////////////////////////////////
 
 		function draw(ctx, state) {
+			ctx.clearRect(0,0,state.w, state.h);
 			var points = [];
 			var freqData = audioService.getFreqArray();
 			var opacity = audioService.getAverageDB() / 75;

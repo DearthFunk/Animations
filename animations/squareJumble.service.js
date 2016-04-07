@@ -24,6 +24,7 @@
 		//////////////////////////////////////////////////
 
 		function draw(ctx, state) {
+			ctx.clearRect(0,0,state.w, state.h);
 			var freqArray = audioService.getFreqArray();
 			var dB = Math.round( (audioService.getAverageDB() / 75) * 10) / 10;
 			var horizontalCells = (parseInt( state.h / (padding * 2 + cellSize ), 10) + 1);
