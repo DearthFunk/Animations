@@ -15,7 +15,7 @@
 		var padding = 0;
 		var opacity = 1;
 		var squeeze = 0;
-		var speed = 1;
+		var speed = 80; //inverted
 		var reduction = 0.1;
 		var total = 1000;
 		var maxSize = 10;
@@ -56,22 +56,23 @@
 			var yM = state.yCenter;
 			var xM = state.xCenter;
 
+			var speedAdjust = dB / speed;
 			for (var i = 0; i < circlesX4.length; i++) {
 				//LEFT TO RIGHT EDITS
 				if (circlesX4[i].side == 3 || circlesX4[i].side == 4) {
 					if (circlesX4[i].y > yM) { circlesX4[i].y - squeeze < yM ? circlesX4[i].y = yM : circlesX4[i].y -= squeeze; }
 					if (circlesX4[i].y < yM) { circlesX4[i].y + squeeze > yM ? circlesX4[i].y = yM : circlesX4[i].y += squeeze;	}
 				}
-				if (circlesX4[i].side == 3) {circlesX4[i].x += (circlesX4[i].removal * speed);}
-				if (circlesX4[i].side == 4) {circlesX4[i].x -= (circlesX4[i].removal * speed);}
+				if (circlesX4[i].side == 3) {circlesX4[i].x += (circlesX4[i].removal * speedAdjust);}
+				if (circlesX4[i].side == 4) {circlesX4[i].x -= (circlesX4[i].removal * speedAdjust);}
 
 				//TOP TO BOTTOM EDITS
 				if (circlesX4[i].side == 1 || circlesX4[i].side == 2) {
 					if (circlesX4[i].x > xM) { circlesX4[i].x - squeeze < xM ? circlesX4[i].x = xM : circlesX4[i].x -= (squeeze*3); }
 					if (circlesX4[i].x < xM) { circlesX4[i].x + squeeze > xM ? circlesX4[i].x = xM : circlesX4[i].x += (squeeze*3);	}
 				}
-				if (circlesX4[i].side == 1) {circlesX4[i].y += (circlesX4[i].removal * speed);}
-				if (circlesX4[i].side == 2) {circlesX4[i].y -= (circlesX4[i].removal * speed);}
+				if (circlesX4[i].side == 1) {circlesX4[i].y += (circlesX4[i].removal * speedAdjust);}
+				if (circlesX4[i].side == 2) {circlesX4[i].y -= (circlesX4[i].removal * speedAdjust);}
 
 				//radius edit for all
 				circlesX4[i].r -= (dB > 0 ? reduction : reduction * 8) ;
