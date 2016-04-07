@@ -2,7 +2,7 @@
 
 	<div data-song></div>
 
-	<div class="message">
+	<div class="message" data-ng-show="animationService.selectedAnimation.input !== INPUT_TYPE.MUSIC">
 		INFO: {{animationService.selectedAnimation.msg}}
 		<div data-squares-controls data-ng-if="animationService.selectedAnimation.name === 'Squares'"></div>
 	</div>

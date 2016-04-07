@@ -20,9 +20,14 @@
 	function squaresControlsController($scope, animationService) {
 
 		$scope.animationService = animationService;
+		$scope.toggle = toggle;
 
 		/////////////////////////////////////////////////////
 
+		function toggle(index){
+			animationService.selectedAnimation.service.rotations[index] = !animationService.selectedAnimation.service.rotations[index];
+			console.log(index, animationService.selectedAnimation.service.rotations[index]);
+		}
 
 	}
 })();

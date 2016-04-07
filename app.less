@@ -29,6 +29,50 @@ body {
 		color: #FFFFFF;
 		padding: 15px;
 		width: 180px;
+		> div.message {
+			border: 1px solid #FFFFFF;
+			border-radius: 2px;
+			margin: 10px;
+			padding: 3px 7px;
+			background-color: #222222;
+			> div.squaresControlsContainer {
+				text-align: center;
+				> div.square {
+					border: 1px solid #AAAAAA;
+					margin: 15px 0;
+					height: 70px;
+					width: 85px;
+					display: inline-block;
+					position: relative;
+					> div {
+						position: absolute;
+						> span {
+							padding: 0 3px;
+							cursor: pointer;
+							&.active {
+								background-color: #4444FF;
+							}
+						}
+						&.topLeft {
+							top: 3px;
+							left: 3px;
+						}
+						&.topRight {
+							top: 3px;
+							right: 3px;
+						}
+						&.bottomLeft {
+							bottom: 3px;
+							left: 3px;
+						}
+						&.bottomRight {
+							bottom: 3px;
+							right: 3px;
+						}
+					}
+				}
+			}
+		}
 	}
 
 	div.menuContainer {
@@ -55,49 +99,6 @@ body {
 		> div.section {
 			border-bottom: 1px solid #FFFFFF;
 			margin: 5px 0;
-		}
-		> div.message {
-			border: 1px solid #FFFFFF;
-			border-radius: 2px;
-			margin: 10px;
-			padding: 3px 7px;
-			background-color: #222222;
-			> div.squaresControlsContainer {
-				text-align: center;
-				> div.square {
-					border: 1px solid #FFFFFF;
-					margin: 15px 0;
-					height: 65px;
-					width: 75px;
-					display: inline-block;
-					position: relative;
-					> div {
-						position: absolute;
-						> span {
-							padding: 0 2px;
-							&.active {
-								background-color: #4444FF;
-							}
-						}
-						&.topLeft {
-							top: 0;
-							left: 3px;
-						}
-						&.topRight {
-							top: 0;
-							right: 3px;
-						}
-						&.bottomLeft {
-							bottom: 0;
-							left: 3px;
-						}
-						&.bottomRight {
-							bottom: 0;
-							right: 3px;
-						}
-					}
-				}
-			}
 		}
 	}
 }
