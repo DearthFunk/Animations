@@ -29,6 +29,15 @@
 		function draw(ctx, state) {
 			var db = audioService.getAverageDB() + 1;
 
+			//partial erase
+			var oldArray = ctx.getImageData(0,0,state.w,state.h);
+			for(var d=3;d<oldArray.data.length;d+=4){ //count through only the alpha pixels
+
+				//dim it with some feedback, I'm using .9
+				oldArray.data[d] = Math.floor(oldArray.data[d]*.9);
+			}
+			ctx.putImageData(oldArray,0,0);
+
 			radiusCounter = 20;
 			spinnerRotate == 360 ? spinnerRotate = 0 : spinnerRotate += speed;
 			spinnerRotate += (db/dbSpeedImpact);
