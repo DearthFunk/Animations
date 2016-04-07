@@ -15,10 +15,11 @@
 		var total = 1000;
 		var maxSize = 70;
 		var speed = 0.1;
-		var baseColor = '#FFFF00';
+		var baseColor = 'rgba(255,255,0,0.5)';
+		var baseSize = 7;
 		var whirlyParticles = [];
 		var dbDegrade = 4.5;
-		
+
 		return service;
 
 		//////////////////////////////////////////////////
@@ -35,19 +36,20 @@
 				orbit: Math.random()
 			}
 		}
-		
+
 		function draw(ctx, state) {
-			var db = audioService.getAverageDB() / 15;
+			var db = audioService.getAverageDB();
+			var dbAdjust = db / 15;
 			for (var i = 0; i < total; i++) {
 				if (angular.isUndefined(whirlyParticles[i])) {whirlyParticles.push( service.createWhirlyParticle(state) ); }
 
 				var particle = whirlyParticles[i];
 				particle.position.x += particle.xMod * speed;
 				particle.position.y += particle.yMod * speed;
-				particle.angle += (particle.speed  * speed) + ( db / 800) ;
+				particle.angle += (particle.speed  * speed) + ( dbAdjust / 800) ;
 
-				if (db > dbDegrade) {
-					var orbit = (state.xCenter * particle.orbit) / (400/db);
+				if (dbAdjust > dbDegrade) {
+					var orbit = (state.xCenter * particle.orbit) / (400/dbAdjust);
 					particle.position.x += Math.cos(i + particle.angle) * orbit;
 					particle.position.y += Math.sin(i + particle.angle) * orbit;
 					if (particle.position.x < 0 || particle.position.x > state.w  ||
@@ -62,8 +64,9 @@
 				particle.size -= 0.02;
 				if (particle.size > 0) {
 					ctx.beginPath();
-					ctx.fillStyle = db > dbDegrade ? particle.fillColor : baseColor;
-					ctx.arc(particle.position.x, particle.position.y, particle.size * maxSize / 2, 0, Math.PI*2, true);
+					var r = particle.size * maxSize / 2;
+					ctx.fillStyle = r < baseSize ? baseColor : particle.fillColor;
+					ctx.arc(particle.position.x, particle.position.y, r, 0, Math.PI*2, true);
 					ctx.fill();
 				}
 			}
