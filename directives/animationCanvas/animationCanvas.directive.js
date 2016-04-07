@@ -10,7 +10,10 @@
 			replace: true,
 			template: '<canvas class="animationCanvas" data-ng-mousedown="mouseDownEvent($event)" oncontextmenu="return false"></canvas>',
 			controller: animationCanvasController,
-			bindToController: true
+			bindToController: true,
+			scope: {
+
+			}
 		};
 		return directive;
 	}
@@ -91,6 +94,7 @@
 		}
 
 		function mouseDownEvent(e) {
+			e.stopPropagation();
 			$scope.window.bind('mouseup', $scope.mouseUpEvent);
 			$scope.state.mouseDown = true;
 
