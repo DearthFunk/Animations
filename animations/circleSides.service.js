@@ -29,7 +29,6 @@
 		//////////////////////////////////////////////////
 
 		function createNewCircle (state) {
-			// 1=top, 2=bottom, 3=left, 4=right
 			var padX = padding * state.w;
 			var padY = padding * state.h;
 			var x = genColors.get.randomNumber(padX, state.w - padX, 0);
@@ -41,12 +40,12 @@
 				side: genColors.get.randomNumber(1,4,0)
 			};
 
-
 			switch (newCircle.side) {
-				case '1': newCircle.x = x; newCircle.y = 0; break;
-				case '2': newCircle.x = x; newCircle.y = state.h; break;
-				case '3': newCircle.x = 0; newCircle.y = y; break;
-				case '4': newCircle.x = state.w; newCircle.y = y;
+				// 1=top, 2=bottom, 3=left, 4=right
+				case 1: newCircle.x = x; newCircle.y = 0; break;
+				case 2: newCircle.x = x; newCircle.y = state.h; break;
+				case 3: newCircle.x = 0; newCircle.y = y; break;
+				case 4: newCircle.x = state.w; newCircle.y = y;
 			}
 			return newCircle;
 		}
