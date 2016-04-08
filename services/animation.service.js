@@ -17,6 +17,7 @@
 		'crazyLines',
 		'galaxy',
 		'lineConnections',
+		'lineConnectionsTwo',
 		'ring',
 		'squares',
 		'stopper',
@@ -56,6 +57,7 @@
 		crazyLines,
 		galaxy,
 		lineConnections,
+		lineConnectionsTwo,
 		ring,
 		squares,
 		stopper,
@@ -92,6 +94,12 @@
 				{   name: 'Line Connections',
 					globalCompositeOperation: 'lighter',
 					service: lineConnections,
+					msg: 'Right Click to change colors.',
+					input: INPUT_TYPE.NONE
+				},
+				{   name: 'Line Connections 2',
+					globalCompositeOperation: 'lighter',
+					service: lineConnectionsTwo,
 					msg: 'N/A',
 					input: INPUT_TYPE.NONE
 				},

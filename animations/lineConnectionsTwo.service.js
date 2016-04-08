@@ -2,11 +2,11 @@
 	'use strict';
 	angular
 		.module('animations')
-		.factory('lineConnections', lineConnections);
+		.factory('lineConnectionsTwo', lineConnectionsTwo);
 
-	lineConnections.inject = ['genColors'];
+	lineConnectionsTwo.inject = [];
 
-	function lineConnections(genColors) {
+	function lineConnectionsTwo() {
 
 		var service = {
 			mouseDownEvent: mouseDownEvent,
@@ -19,8 +19,6 @@
 		var orbitFlux = 100;
 		var speed = 4;
 		var screenPadding = 120;
-		var dotColor = '#FFFFFF';
-		var lineColor = '#FF0000';
 
 		for (var i = 0; i < galaxyTotalStars; i++) {
 			galaxyStars.push({
@@ -40,10 +38,6 @@
 		///////////////////////////////////////
 
 		function mouseDownEvent(e, state) {
-			if (e.which === 3) {
-				dotColor = genColors.random.hex();
-				lineColor = genColors.random.hex();
-			}
 		}
 
 		function draw(ctx, state) {
@@ -56,7 +50,7 @@
 				galaxyStars[i].yD = screenPadding + Math.floor((star.y * (state.h-(screenPadding*2))) + ( Math.sin(i + star.angle) * star.orbit));
 
 				ctx.beginPath();
-				ctx.fillStyle = dotColor;
+				ctx.fillStyle = '#FFFFFF';
 				ctx.arc(galaxyStars[i].xD, galaxyStars[i].yD, galaxyStars[i].size, 0, Math.PI*2, true);
 				ctx.fill();
 				ctx.closePath();
@@ -71,7 +65,7 @@
 					if (d < lineFlux) {
 
 						ctx.beginPath();
-						ctx.strokeStyle = genColors.convert.rgba(lineColor, d/lineFlux);
+						ctx.strokeStyle = 'rgba(255,0,0,' + d/lineFlux + ')';
 						ctx.lineWidth = 1 - (d/lineFlux);
 
 						ctx.moveTo(Math.floor(p1.xD), Math.floor(p1.yD));
