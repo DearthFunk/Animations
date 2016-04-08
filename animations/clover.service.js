@@ -49,13 +49,13 @@
 				var inDeadZone = false;
 
 				for (var x = 0; x < deadZones; x++) {
-					var dzAngle = (Math.PI*2/deadZones*x)%(Math.PI*2) + angle;
-
+					var dzAngle = ((Math.PI*2/deadZones*x) + angle) %(Math.PI*2);
 					if (dzAngle > rad-deadRange && dzAngle < rad+deadRange) {
 						ctx.fillStyle = '#FFFFFF';
 						inDeadZone = true;
 					}
 				}
+
 				if(!inDeadZone) {
 					ctx.fillStyle = clrs[i];
 				}
