@@ -2,11 +2,11 @@
 	'use strict';
 	angular
 		.module('animations')
-		.factory('lineConnectionsTwo', lineConnectionsTwo);
+		.factory('lineConnections', lineConnections);
 
-	lineConnectionsTwo.inject = [];
+	lineConnections.inject = [];
 
-	function lineConnectionsTwo() {
+	function lineConnections() {
 
 		var service = {
 			mouseDownEvent: mouseDownEvent,

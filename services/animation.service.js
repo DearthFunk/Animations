@@ -17,7 +17,7 @@
 		'crazyLines',
 		'galaxy',
 		'lineConnections',
-		'lineConnectionsTwo',
+		'redElectricity',
 		'ring',
 		'squares',
 		'stopper',
@@ -57,7 +57,7 @@
 		crazyLines,
 		galaxy,
 		lineConnections,
-		lineConnectionsTwo,
+		redElectricity,
 		ring,
 		squares,
 		stopper,
@@ -97,9 +97,9 @@
 					msg: 'Right Click to change colors.',
 					input: INPUT_TYPE.NONE
 				},
-				{   name: 'Line Connections 2',
+				{   name: 'Red Electricity',
 					globalCompositeOperation: 'lighter',
-					service: lineConnectionsTwo,
+					service: redElectricity,
 					msg: 'N/A',
 					input: INPUT_TYPE.NONE
 				},
@@ -311,7 +311,7 @@
 			]
 		};
 
-		service.selectedAnimation = service.animations[service.animations.length-1];
+		service.selectedAnimation = service.animations[1];
 		return service;
 	}
 })();

@@ -53,6 +53,7 @@
 					if (dzAngle > rad-deadRange && dzAngle < rad+deadRange) {
 						ctx.fillStyle = '#FFFFFF';
 						inDeadZone = true;
+						mRad -= 30;
 					}
 				}
 
