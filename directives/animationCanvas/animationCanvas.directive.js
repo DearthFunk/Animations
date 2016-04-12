@@ -58,11 +58,14 @@
 		$scope.mouseUpEvent = mouseUpEvent;
 		$scope.mouseDownEvent = mouseDownEvent;
 		$scope.windowResize = windowResize;
+		$scope.globalCompositeChange = globalCompositeChange;
+		$scope.animationService = animationService;
 
 		$scope.window.bind('resize', $scope.windowResize);
 		$scope.window.bind('keyup', $scope.keyUpEvent);
 		$scope.window.bind('keydown', $scope.keyDownEvent);
 		$scope.window.bind('mousemove', $scope.mouseMoveEvent);
+		$scope.$watch('animationService.selectedAnimation.globalCompositeOperation', $scope.globalCompositeChange);
 
 		audioService.animationDrawCallback = $scope.drawAnimation;
 
@@ -81,14 +84,12 @@
 			angular.element(cnv).attr({width: $scope.state.w, height: $scope.state.h });
 		}
 
+		function globalCompositeChange() {
+			ctx.globalCompositeOperation = animationService.selectedAnimation.globalCompositeOperation;
+		}
+		
 		function drawAnimation() {
-			//set globalComposition
-			if(animationService.selectedAnimation.globalCompositeOperation !== ctx.globalCompositeOperation) {
-				ctx.globalCompositeOperation = animationService.selectedAnimation.globalCompositeOperation;
-			}
-
 			animationService.selectedAnimation.service.draw(ctx, $scope.state);
-
 		}
 
 		function mouseDownEvent(e) {

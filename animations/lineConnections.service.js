@@ -14,11 +14,11 @@
 		};
 
 		var galaxyStars = [];
-		var galaxyTotalStars = 600;
+		var galaxyTotalStars = 700;
 		var lineFlux = 50;
 		var orbitFlux = 100;
 		var speed = 0.03;
-		var screenPadding = 120;
+		var screenPadding = 160;
 		var twoPI = Math.PI * 2;
 
 		for (var i = 0; i < galaxyTotalStars; i++) {
