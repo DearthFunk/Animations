@@ -19,7 +19,7 @@
 		var orbitFlux = 300;
 		var screenPadding = 300;
 		var mainColor = '#FF0000';
-		var oddsOfWhiteLine = 3;
+		var oddsOfWhiteLine = 5;
 
 		for (var i = 0; i < galaxyTotalStars; i++) {
 			galaxyStars.push({
@@ -60,7 +60,7 @@
 
 			for (var a = 0; a < galaxyStars.length; a++) {
 				var p1 = galaxyStars[a];
-				var whiteLine = genColors.get.randomNumber(1,oddsOfWhiteLine,0) === 1;
+				var lineColor = genColors.get.randomNumber(1,oddsOfWhiteLine,0) === 1 ? '#FFFFFF' : mainColor;
 				for (var b = a; b < galaxyStars.length; b++) {
 					var p2 = galaxyStars[b];
 					d = Math.sqrt( Math.pow(p1.xD - p2.xD, 2) + Math.pow(p1.yD - p2.yD, 2) );
@@ -68,7 +68,7 @@
 
 						ctx.beginPath();
 
-						ctx.strokeStyle = whiteLine ? 'rgba(255,255,255,0.5)' :	genColors.convert.rgba(mainColor,d/lineFlux);
+						ctx.strokeStyle = genColors.convert.rgba(lineColor,d/lineFlux);
 						ctx.lineWidth = 1 - (d/lineFlux);
 
 						ctx.moveTo(p1.xD, p1.yD);
