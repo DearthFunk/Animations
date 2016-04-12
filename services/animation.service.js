@@ -11,6 +11,7 @@
 
 	animationService.$inject = [
 		'INPUT_TYPE',
+		'discService',
 		'bubbles',
 		'circles',
 		'crazy',
@@ -51,6 +52,7 @@
 
 	function animationService(
 		INPUT_TYPE,
+		discService,
 		bubbles,
 		circles,
 		crazy,
@@ -95,6 +97,12 @@
 					globalCompositeOperation: 'lighter',
 					service: lineConnections,
 					msg: 'Right Click to change colors.',
+					input: INPUT_TYPE.NONE
+				},
+				{   name: 'Disc',
+					globalCompositeOperation: 'lighter',
+					service: discService,
+					msg: '',
 					input: INPUT_TYPE.NONE
 				},
 				{   name: 'Red Electricity',
