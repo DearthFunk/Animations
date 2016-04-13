@@ -20,6 +20,7 @@
 		var screenPadding = 300;
 		var mainColor = '#FF0000';
 		var oddsOfWhiteLine = 5;
+		var oddsOfBlueLine = 10;
 
 		for (var i = 0; i < galaxyTotalStars; i++) {
 			galaxyStars.push({
@@ -45,7 +46,7 @@
 			var oldArray = ctx.getImageData(0,0,state.w,state.h);
 			for(var d=3;d<oldArray.data.length;d+=4){ //count through only the alpha pixels
 				//dim it with some feedback, I'm using .9
-				oldArray.data[d] = Math.floor(oldArray.data[d]*.9);
+				oldArray.data[d] = Math.floor(oldArray.data[d]*.85);
 			}
 			ctx.putImageData(oldArray,0,0);
 
@@ -60,7 +61,10 @@
 
 			for (var a = 0; a < galaxyStars.length; a++) {
 				var p1 = galaxyStars[a];
-				var lineColor = genColors.get.randomNumber(1,oddsOfWhiteLine,0) === 1 ? '#FFFFFF' : mainColor;
+				var lineColor =
+					genColors.get.randomNumber(1,oddsOfWhiteLine,0) === 1 ? '#FFFFFF' :
+					genColors.get.randomNumber(1,oddsOfBlueLine,0) === 1 ? '#0000FF' :
+					mainColor;
 				for (var b = a; b < galaxyStars.length; b++) {
 					var p2 = galaxyStars[b];
 					d = Math.sqrt( Math.pow(p1.xD - p2.xD, 2) + Math.pow(p1.yD - p2.yD, 2) );
