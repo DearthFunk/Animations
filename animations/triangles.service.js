@@ -13,9 +13,9 @@
 			drawTriangle: drawTriangle
 		};
 		var layers = 12;
-		var size = 30;
-		var numW = 20;
-		var numH = 20;
+		var size = 100;
+		var numW = 10;
+		var numH = 10;
 		var rotation = 0;
 		var speed = 0.001;
 
@@ -49,20 +49,6 @@
 						ctx.closePath();
 					}
 				}
-
-				ctx.strokeStyle = genColors.convert.rgba('#FF0000', i/layers);
-
-				ctx.beginPath();
-				ctx.moveTo(state.xCenter - rectX, state.yCenter - rectY);
-				ctx.lineTo(state.xCenter + rectX, state.yCenter + rectY);
-				ctx.stroke();
-				ctx.closePath();
-
-				ctx.beginPath();
-				ctx.moveTo(state.xCenter + rectX, state.yCenter - rectY);
-				ctx.lineTo(state.xCenter - rectX, state.yCenter + rectY);
-				ctx.stroke();
-				ctx.closePath();
 
 				ctx.restore();
 			}
