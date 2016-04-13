@@ -14,7 +14,7 @@
 		};
 
 		var angleSize = 0;
-		var discSlices = 30;
+		var discSlices = 4;
 		var discRows = 5;
 		var disc = [];
 		var verticalPadding = 20;
@@ -31,7 +31,7 @@
 			disc = [];
 			rad = state.h / 2 - (verticalPadding*2);
 			angleSize =  Math.PI * 2 / discSlices;
-			for (var i = 0; i < discRows; i++) {
+			for (var i = 0; i < discRows+2; i++) {
 				var ring = {
 					index: i,
 					rad: rad / discRows * i,
@@ -80,11 +80,11 @@
 			ctx.clearRect(0,0,state.w,state.h);
 			checkHoverPosition(state);
 
-			for (var sliceIndex = 0; sliceIndex < discSlices; sliceIndex++) {
-				for (var rowIndex = 0; rowIndex < discRows; rowIndex++) {
+			for (var sliceIndex = 0; sliceIndex < disc[0].slice.length; sliceIndex++) {
+				for (var rowIndex = 0; rowIndex < disc.length-2; rowIndex++) {
 
-					var rIndex = rowIndex == discRows-1 ? 0 : rowIndex + 1;
-					var sIndex = sliceIndex == discSlices-1 ? 0 : sliceIndex + 1;
+					var rIndex = rowIndex == disc.length-1 ? 0 : rowIndex + 1;
+					var sIndex = sliceIndex == disc[0].slice.length-1 ? 0 : sliceIndex + 1;
 					var p1 = disc[rowIndex].slice[sliceIndex];
 					var p2 = disc[rIndex].slice[sliceIndex];
 					var p3 = disc[rowIndex].slice[sIndex];
@@ -98,6 +98,7 @@
 					ctx.arc(state.xCenter, state.yCenter, disc[rowIndex].rad, p1.a2, p1.a1, true);
 
 					if (sliceIndex === hoverRow && hoverSlice === rowIndex) { // hover cell
+						console.log(sliceIndex, rowIndex);
 						ctx.lineWidth = 1;
 						ctx.strokeStyle = '#FFFFFF';
 						ctx.fillStyle = 'rgba(100,100,100,0.5)';
