@@ -37,6 +37,7 @@
 		'flower',
 		'fountain',
 		'grid',
+		'gridFlow',
 		'hexMap',
 		'mathMachine',
 		'mountains',
@@ -78,6 +79,7 @@
 		flower,
 		fountain,
 		grid,
+		gridFlow,
 		hexMap,
 		mathMachine,
 		mountains,
@@ -97,6 +99,12 @@
 					globalCompositeOperation: 'lighter',
 					service: lineConnections,
 					msg: 'Right Click to change colors.',
+					input: INPUT_TYPE.NONE
+				},
+				{   name: 'Grid Flow',
+					globalCompositeOperation: 'lighter',
+					service: gridFlow,
+					msg: '',
 					input: INPUT_TYPE.NONE
 				},
 				{   name: 'Disc',
