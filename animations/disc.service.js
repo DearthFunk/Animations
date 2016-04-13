@@ -4,24 +4,27 @@
 		.module('animations')
 		.factory('discService', discService);
 
-	discService.$inject = [];
+	discService.$inject = ['genColors'];
 
-	function discService() {
+	function discService(genColors) {
 
 		var service = {
 			draw: draw,
 			windowResizeEvent: windowResizeEvent
 		};
 
+		var updateColors = false;
+		var colorIndex = 0;
+		var rad = 0;
 		var angleSize = 0;
-		var discSlices = 4;
-		var discRows = 5;
-		var disc = [];
+		var discSlices = 40;
+		var discRows = 6;
 		var verticalPadding = 20;
-		var rad;
+		var disc = [];
 		var sliceAngles = [];
 		var hoverRow = -1;
 		var hoverSlice = -1;
+		var colorLength = 100;
 
 		return service;
 
@@ -39,11 +42,14 @@
 				};
 				for (var d = 0; d < discSlices; d++) {
 					sliceAngles[d] = angleSize * d;
+					var c1 = genColors.randomBetween.rgba('#AA8639', '#553A00');
+					var c2 = genColors.randomBetween.rgba('#AA8639', '#553A00');
 					ring.slice.push ({
 						a1: angleSize * d,
 						a2: angleSize * (d+1),
 						x: state.xCenter + (ring.rad) * Math.cos(angleSize * (d)),
-						y: state.yCenter + (ring.rad) * Math.sin(angleSize * (d))
+						y: state.yCenter + (ring.rad) * Math.sin(angleSize * (d)),
+						c: genColors.array.rgba(c1, c2, colorLength)
 					})
 				}
 				disc.push(ring);
@@ -77,6 +83,12 @@
 		}
 
 		function draw(ctx, state) {
+			colorIndex++;
+			if (colorIndex >= colorLength) {
+				colorIndex = 0;
+				updateColors = true;
+
+			}
 			ctx.clearRect(0,0,state.w,state.h);
 			checkHoverPosition(state);
 
@@ -97,8 +109,13 @@
 					ctx.lineTo(p3.x,p3.y);
 					ctx.arc(state.xCenter, state.yCenter, disc[rowIndex].rad, p1.a2, p1.a1, true);
 
+					if (updateColors) {
+						var c1 = p1.c[colorLength-1];
+						var c2 = genColors.randomBetween.rgba('#AA8639', '#553A00');
+						p1.c = genColors.array.rgba(c1, c2, colorLength)
+					}
+
 					if (sliceIndex === hoverRow && hoverSlice === rowIndex) { // hover cell
-						console.log(sliceIndex, rowIndex);
 						ctx.lineWidth = 1;
 						ctx.strokeStyle = '#FFFFFF';
 						ctx.fillStyle = 'rgba(100,100,100,0.5)';
@@ -108,12 +125,15 @@
 					else {
 						ctx.lineWidth = 0.2;
 						ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+						ctx.fillStyle = disc[rowIndex].slice[sliceIndex].c[colorIndex];
 						ctx.stroke();
+						ctx.fill();
 					}
 
 					ctx.closePath();
 				}
 			}
+			updateColors = false;
 		}
 	}
 })();
