@@ -13,18 +13,22 @@
 			windowResizeEvent: windowResizeEvent
 		};
 
+		var distanceFromCenter = 0;
 		var updateColors = false;
 		var colorIndex = 0;
 		var rad = 0;
 		var angleSize = 0;
-		var discSlices = 40;
-		var discRows = 6;
-		var verticalPadding = 20;
+		var discSlices = 60;
+		var discRows = 10;
+		var verticalPadding = 5;
 		var disc = [];
 		var sliceAngles = [];
 		var hoverRow = -1;
 		var hoverSlice = -1;
 		var colorLength = 100;
+		var colorOne = '#FF0000'; //'#AA8639';
+		var colorTwo = '#0000FF'; //'#553A00';
+		var mouseAdjust = 1;
 
 		return service;
 
@@ -42,8 +46,8 @@
 				};
 				for (var d = 0; d < discSlices; d++) {
 					sliceAngles[d] = angleSize * d;
-					var c1 = genColors.randomBetween.rgba('#AA8639', '#553A00');
-					var c2 = genColors.randomBetween.rgba('#AA8639', '#553A00');
+					var c1 = genColors.randomBetween.rgba(colorOne, colorTwo);
+					var c2 = genColors.randomBetween.rgba(colorOne, colorTwo);
 					ring.slice.push ({
 						a1: angleSize * d,
 						a2: angleSize * (d+1),
@@ -58,7 +62,7 @@
 		}
 
 		function checkHoverPosition(state) {
-			var distanceFromCenter = Math.sqrt(
+			distanceFromCenter = Math.sqrt(
 				Math.pow(state.mouseX - (state.w / 2), 2) +
 				Math.pow(state.mouseY - (state.h / 2), 2) );
 			if (distanceFromCenter < rad) {
@@ -102,16 +106,21 @@
 					var p3 = disc[rowIndex].slice[sIndex];
 					var p4 = disc[rIndex].slice[sIndex];
 
+					var xAdjust = (state.mouseX - state.xCenter) / mouseAdjust;
+					var yAdjust = (state.mouseY - state.yCenter) / mouseAdjust;
+					var rAjust = Math.abs(xAdjust + yAdjust) * 10;
+
 					ctx.beginPath();
 					ctx.moveTo(p1.x,p1.y);
 					ctx.lineTo(p2.x, p2.y);
-					ctx.arc(state.xCenter, state.yCenter, disc[rIndex].rad, p2.a1, p2.a2, false);
+					//ctx.arc(state.xCenter, state.yCenter, disc[rIndex].rad, p2.a1, p2.a2, false);
+					ctx.bezierCurveTo(p2.x, p2.y, p3.x + xAdjust, p3.y +yAdjust, p4.x, p4.y);
 					ctx.lineTo(p3.x,p3.y);
 					ctx.arc(state.xCenter, state.yCenter, disc[rowIndex].rad, p1.a2, p1.a1, true);
 
 					if (updateColors) {
 						var c1 = p1.c[colorLength-1];
-						var c2 = genColors.randomBetween.rgba('#AA8639', '#553A00');
+						var c2 = genColors.randomBetween.rgba(colorOne, colorTwo);
 						p1.c = genColors.array.rgba(c1, c2, colorLength)
 					}
 
