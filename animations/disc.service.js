@@ -9,14 +9,14 @@
 	function discService() {
 
 		var service = {
-			draw: draw
+			draw: draw,
+			windowResizeEvent: windowResizeEvent
 		};
 
 		var angleSize = 0;
 		var discSlices = 20;
 		var discRows = 5;
 		var disc = [];
-		var centerSize = 1;
 		var verticalPadding = 20;
 		var rad;
 		var sliceAngles = [];
@@ -27,14 +27,15 @@
 
 		//////////////////////////////////////////////////
 
-		function init(state){
+		function windowResizeEvent(e, state) {
+			disc = [];
 			rad = state.h / 2 - (verticalPadding*2);
 			angleSize =  Math.PI * 2 / discSlices;
 			for (var i = 0; i < discRows; i++) {
-				
+
 				var ring = {
 					index: i,
-					rad: rad / discRows * (i+1),
+					rad: rad / discRows * i,
 					beats: []
 				};
 				for (var d = 0; d < discSlices; d++) {
@@ -43,22 +44,45 @@
 						a1: angleSize * d,
 						a2: angleSize * (d+1),
 						x: state.xCenter + (ring.rad) * Math.cos(angleSize * (d)),
-						y: state.yCenter + (ring.rad) * Math.sin(angleSize * (d)),
-						active: false
+						y: state.yCenter + (ring.rad) * Math.sin(angleSize * (d))
 					})
 				}
 				disc.push(ring);
 			}
 			sliceAngles[discSlices] = angleSize * (d+1);
 			initialized = true;
-			console.log(disc);
+		}
+
+		function checkHoverPosition(state) {
+			var distanceFromCenter = Math.sqrt(
+				Math.pow(state.mouseX - (state.w / 2), 2) + Math.pow(state.mouseY - (state.h/2), 2) );
+			if (distanceFromCenter < rad) {
+				for (var layer = 0; layer < disc.length-1; layer++) {
+					if (distanceFromCenter > disc[layer].rad && distanceFromCenter < disc[layer+1].rad) {
+						hoverBeat = layer;
+						break;
+					}
+				}
+				var angle = Math.atan2((state.h/2) - state.mouseY, state.w / 2 - state.mouseX) + Math.PI;
+				for (var i = 0; i < discSlices; i++) {
+					if (angle > sliceAngles[i] && angle < sliceAngles[i+1]) {
+						hoverSample = i;
+						break;
+					}
+				}
+			}
+			else {
+				hoverSample = -1;
+				hoverBeat = -1;
+			}
 		}
 
 		function draw(ctx, state) {
-			if (!initialized) { init(state); }
+			ctx.clearRect(0,0,state.w,state.h);
+			checkHoverPosition(state);
 
 			for (var sIndex = 0; sIndex < discSlices; sIndex++) {
-				for (var rIndex = 0; rIndex < discRows-1; rIndex++) {
+				for (var rIndex = 0; rIndex < discRows; rIndex++) {
 
 					var Sind2 = rIndex == discRows-1 ? 0 : rIndex + 1;
 					var bInd2 = sIndex == discSlices-1 ? 0 : sIndex + 1;
@@ -75,37 +99,21 @@
 					ctx.arc(state.xCenter, state.yCenter, disc[rIndex].rad, p1.a2, p1.a1, true);
 
 
-					/*if (disc[sInd1].beats[bInd1].active) { // active cell
-						ctx.lineWidth = 2;
-						ctx.strokeStyle = "#000000";
-						ctx.fillStyle = "rgba(100,255,100,0.05)";
-					}
-					else if (sInd1 == hoverSample && hoverBeat == bInd1) { // hover cell
+
+					if (sIndex === hoverSample && hoverBeat === rIndex) { // hover cell
 						ctx.lineWidth = 3;
 						ctx.strokeStyle = "#000000";
 						ctx.fillStyle = "rgba(100,255,100,0.5)";
 					}
 					else {
 						ctx.lineWidth = 1;
-						ctx.strokeStyle = "rgba(0,0,0,0.1)";
-					}*/
-					ctx.strokeStyle = '#FFFFFF';
+						ctx.strokeStyle = "rgba(255,255,255,0.5)";
+						ctx.fillStyle = 'rgba(0,0,0,0)';
+					}
+
 					ctx.stroke();
+					ctx.fill();
 					ctx.closePath();
-/*
-					//in circles for active cells
-					if (disc[sInd1].beats[bInd1].active) {
-						var a = (sliceAngles[bInd2] - sliceAngles[bInd1]) * bInd1 + (angleSize/2);
-						var r = (disc[sInd1].rad + disc[Sind2].rad)/2;
-						ctx.beginPath();
-						ctx.lineWidth = 1;
-						ctx.strokeStyle = "#FFFFFF";
-						ctx.arc(state.xCenter + r * Math.cos(a),state.yCenter + r * Math.sin(a),10,0,Math.PI*2,false);
-						ctx.fillStyle = "rgba(100,255,100,0.8)";
-						ctx.fill();
-						ctx.stroke();
-						ctx.closePath();
-					}*/
 				}
 			}
 		}

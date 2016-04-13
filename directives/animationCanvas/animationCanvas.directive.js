@@ -73,7 +73,7 @@
 
 		///////////////////////////////////////////////////////////
 
-		function windowResize() {
+		function windowResize(e) {
 			$scope.state.w = $window.innerWidth;
 			$scope.state.h = $window.innerHeight;
 			cnv.style.width = $scope.state.w +'px';
@@ -82,6 +82,11 @@
 			$scope.state.yCenter = $scope.state.h / 2;
 			$scope.state.mainRadius = $scope.state.yCenter;
 			angular.element(cnv).attr({width: $scope.state.w, height: $scope.state.h });
+
+			var anim = animationService.selectedAnimation.service;
+			if (angular.isDefined(anim.windowResizeEvent)) {
+				anim.windowResizeEvent(e, $scope.state);
+			}
 		}
 
 		function globalCompositeChange() {
