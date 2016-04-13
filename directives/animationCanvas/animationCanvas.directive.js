@@ -67,9 +67,8 @@
 		$scope.window.bind('mousemove', $scope.mouseMoveEvent);
 		$scope.$watch('animationService.selectedAnimation.globalCompositeOperation', $scope.globalCompositeChange);
 
-		audioService.animationDrawCallback = $scope.drawAnimation;
-
 		$scope.windowResize();
+		$scope.drawAnimation();
 
 		///////////////////////////////////////////////////////////
 
@@ -94,6 +93,7 @@
 		}
 		
 		function drawAnimation() {
+			requestAnimationFrame($scope.drawAnimation);
 			animationService.selectedAnimation.service.draw(ctx, $scope.state);
 		}
 

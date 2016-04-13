@@ -12,7 +12,6 @@
 			onaudioprocess: onaudioprocess,
 			initialize: initialize,
 			songDrawCallback: false,
-			animationDrawCallback: false,
 			audioBufferSize: 1024,
 			audioSmoothing: 0.3,
 
@@ -57,10 +56,6 @@
 			if (service.songDrawCallback) {
 				service.songDrawCallback();
 			}
-			if (service.animationDrawCallback) {
-				service.animationDrawCallback();
-			}
-
 		}
 
 		//////////////////////////////////////////
