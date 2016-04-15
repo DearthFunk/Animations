@@ -93,6 +93,9 @@
 				updateColors = true;
 
 			}
+			if (disc.length === 0) {
+				windowResizeEvent({}, state);
+			}
 			ctx.clearRect(0,0,state.w,state.h);
 			checkHoverPosition(state);
 
@@ -106,15 +109,15 @@
 					var p3 = disc[rowIndex].slice[sIndex];
 					var p4 = disc[rIndex].slice[sIndex];
 
-					var xAdjust = (state.mouseX - state.xCenter) / mouseAdjust;
-					var yAdjust = (state.mouseY - state.yCenter) / mouseAdjust;
+					var xAdjust = 0; //(state.mouseX - state.xCenter) / mouseAdjust;
+					var yAdjust = 0; //(state.mouseY - state.yCenter) / mouseAdjust;
 					var rAjust = Math.abs(xAdjust + yAdjust) * 10;
 
 					ctx.beginPath();
 					ctx.moveTo(p1.x,p1.y);
 					ctx.lineTo(p2.x, p2.y);
-					//ctx.arc(state.xCenter, state.yCenter, disc[rIndex].rad, p2.a1, p2.a2, false);
-					ctx.bezierCurveTo(p2.x, p2.y, p3.x + xAdjust, p3.y +yAdjust, p4.x, p4.y);
+					ctx.arc(state.xCenter, state.yCenter, disc[rIndex].rad, p2.a1, p2.a2, false);
+					//ctx.bezierCurveTo(p2.x, p2.y, p3.x + xAdjust, p3.y +yAdjust, p4.x, p4.y);
 					ctx.lineTo(p3.x,p3.y);
 					ctx.arc(state.xCenter, state.yCenter, disc[rowIndex].rad, p1.a2, p1.a1, true);
 

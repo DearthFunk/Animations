@@ -25,7 +25,6 @@
 		//////////////////////////////////////////////////
 
 		function windowResizeEvent(e, state) {
-			console.log(state);
 			grid = [];
 			cellsWide = Math.floor(state.w / cellSize) + 1;
 			cellsHigh = Math.floor(state.h / cellSize) + 1;
@@ -38,7 +37,6 @@
 					})
 				}
 			}
-			console.log(cellsWide, cellsHigh, grid);
 		}
 
 		function draw(ctx, state) {
