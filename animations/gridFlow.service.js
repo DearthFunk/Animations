@@ -16,8 +16,13 @@
 		var cellSize = 60;
 		var cellsWide = 0;
 		var cellsHigh = 0;
+		var cellsWideHalf = 0;
+		var cellsHighHalf = 0;
 		var gridColor = '#444444';
 		var gridThickness = 0.7;
+		var impact = 1;
+		var impactSpeed = 0.1;
+		var maxImpact = 30;
 		var grid = [];
 
 		return service;
@@ -28,6 +33,8 @@
 			grid = [];
 			cellsWide = Math.floor(state.w / cellSize) + 1;
 			cellsHigh = Math.floor(state.h / cellSize) + 1;
+			cellsWideHalf = Math.floor(cellsWide/2);
+			cellsHighHalf = Math.floor(cellsHigh/2);
 			for (var y = 0; y < cellsHigh+1; y++) {
 				grid.push([]);
 				for (var x = 0; x < cellsWide+1; x++) {
@@ -41,18 +48,49 @@
 
 		function draw(ctx, state) {
 			ctx.clearRect(0, 0, state.w, state.h);
-			ctx.lineWidth = gridThickness;
-			ctx.strokeStyle = gridColor;
+			impact += impactSpeed;
+			if (impact > maxImpact || impact < 1) {
+				impactSpeed *= -1
+			}
+			var xD = (state.xCenter - state.mouseX) * impact;
+			var yD = (state.yCenter - state.mouseY) * (impact/2);
+
+			//draw grid
+			ctx.strokeStyle = 'rgba(255,0,0,0.2)';
 			for (var y = 0; y < cellsHigh; y++) {
 				for (var x = 0; x < cellsWide; x++) {
 					var p1 = grid[y][x];
 					var p2 = grid[y + 1][x + 1];
+
 					ctx.beginPath();
 					ctx.moveTo(p1.x, p1.y);
 					ctx.lineTo(p2.x, p1.y);
 					ctx.lineTo(p2.x, p2.y);
 					ctx.lineTo(p1.x, p2.y);
 					ctx.lineTo(p1.x, p1.y);
+					ctx.stroke();
+					ctx.closePath();
+				}
+			}
+
+			ctx.lineWidth = gridThickness;
+			ctx.strokeStyle = gridColor;
+			for (y = 0; y < cellsHigh; y++) {
+				for (x = 0; x < cellsWide; x++) {
+					var p1 = grid[y][x];
+					var p2 = grid[y + 1][x + 1];
+
+					var xDD = xD * (x - cellsWideHalf) / cellsWideHalf;
+					var yDD = yD * (y - cellsHighHalf) / cellsHighHalf;
+					ctx.beginPath();
+					ctx.moveTo(p1.x + xDD, p1.y + yDD);
+					ctx.bezierCurveTo(p2.x, p1.y, p1.x, p2.y, p2.x + xDD, p2.y + yDD);
+					ctx.stroke();
+					ctx.closePath();
+
+					ctx.beginPath();
+					ctx.moveTo(p1.x + xDD, p2.y + yDD);
+					ctx.bezierCurveTo(p2.x, p2.y, p1.x, p1.y, p2.x + xDD, p1.y + yDD);
 					ctx.stroke();
 					ctx.closePath();
 				}
