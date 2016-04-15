@@ -18,7 +18,8 @@
 		var lineFlux = 50;
 		var orbitFlux = 100;
 		var speed = 0.03;
-		var screenPadding = 160;
+		var hPadding = 360;
+		var wPadding = 160;
 		var twoPI = Math.PI * 2;
 
 		for (var i = 0; i < galaxyTotalStars; i++) {
@@ -44,14 +45,14 @@
 		function draw(ctx, state) {
 			ctx.clearRect(0,0,state.w, state.h);
 			ctx.fillStyle = '#FFFFFF';
-			var w = state.w-(screenPadding*2);
-			var h = state.h-(screenPadding*2);
+			var w = state.w-(wPadding*2);
+			var h = state.h-(hPadding*2);
 			for (i = 0; i < galaxyStars.length; i++) {
 				var star = galaxyStars[i];
 
 				star.angle += star.speed;
-				star.xD = screenPadding + Math.floor(star.x * w + ( Math.cos(i + star.angle) * star.orbit));
-				star.yD = screenPadding + Math.floor(star.y * h + ( Math.sin(i + star.angle) * star.orbit));
+				star.xD = wPadding + Math.floor(star.x * w + ( Math.cos(i + star.angle) * star.orbit));
+				star.yD = hPadding + Math.floor(star.y * h + ( Math.sin(i + star.angle) * star.orbit));
 
 				ctx.beginPath();
 				ctx.arc(star.xD, star.yD, star.size, 0, twoPI, true);
