@@ -26,9 +26,11 @@
 		var sliceAngles = [];
 		var hoverRow = -1;
 		var hoverSlice = -1;
-		var colorLength = 100;
+		var colorLength = 50;
+		var rotateSpeed = 0.2;
 		var colorOne = genColors.random.hex();
 		var colorTwo = genColors.random.hex();
+		var sliceRotateIndex = 0;
 
 		return service;
 
@@ -98,11 +100,14 @@
 		}
 
 		function draw(ctx, state) {
+			sliceRotateIndex += rotateSpeed;
 			colorIndex++;
 			if (colorIndex >= colorLength) {
 				colorIndex = 0;
 				updateColors = true;
-
+			}
+			if (sliceRotateIndex >= discSlices) {
+				sliceRotateIndex = 0;
 			}
 			if (disc.length === 0) {
 				windowResizeEvent({}, state);
@@ -142,6 +147,11 @@
 						ctx.lineWidth = 3;
 						ctx.strokeStyle = '#FFFFFF';
 						ctx.fillStyle = 'rgba(100,100,100,0.5)';
+					}
+					else if (sliceIndex === Math.floor(sliceRotateIndex)) {
+						ctx.lineWidth = 1;
+						ctx.strokeStyle = '#444444';
+						ctx.fillStyle = 'rgba(0,0,0,0)';
 					}
 					else {
 						ctx.lineWidth = 1;
