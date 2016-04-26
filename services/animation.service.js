@@ -48,7 +48,8 @@
 		'squareJumble',
 		'sunAndClouds',
 		'tunnel',
-		'whirlyParticles'
+		'whirlyParticles',
+		'lineClusters'
 	];
 
 	function animationService(
@@ -90,7 +91,8 @@
 		squareJumble,
 		sunAndClouds,
 		tunnel,
-		whirlyParticles
+		whirlyParticles,
+		lineClusters
 	){
 		var service =  {
 			selectedAnimation: -1,
@@ -99,6 +101,12 @@
 					globalCompositeOperation: 'lighter',
 					service: lineConnections,
 					msg: 'Right Click to change colors.',
+					input: INPUT_TYPE.NONE
+				},
+				{   name: 'Line Clusters',
+					globalCompositeOperation: 'lighter',
+					service: lineClusters,
+					msg: '',
 					input: INPUT_TYPE.NONE
 				},
 				{   name: 'Grid Flow',
