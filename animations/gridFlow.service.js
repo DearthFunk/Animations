@@ -47,54 +47,52 @@
 		}
 
 		function draw(ctx, state) {
-			ctx.clearRect(0, 0, state.w, state.h);
+			//ctx.clearRect(0, 0, state.w, state.h);
+			//partial erase
+			var oldArray = ctx.getImageData(0,0,state.w,state.h);
+			for(var d=3;d<oldArray.data.length;d+=4){ //count through only the alpha pixels
+				//dim it with some feedback, I'm using .9
+				oldArray.data[d] = Math.floor(oldArray.data[d]*.4);
+			}
+			ctx.putImageData(oldArray,0,0);
+
 			impact += impactSpeed;
 			if (impact > maxImpact || impact < 1) {
 				impactSpeed *= -1
 			}
-			var xD = (state.xCenter - state.mouseX) * impact;
-			var yD = (state.yCenter - state.mouseY) * (impact/2);
 
-			//draw grid
-			ctx.strokeStyle = 'rgba(255,0,0,0.2)';
+			ctx.lineWidth = gridThickness;
+			ctx.strokeStyle = gridColor;
+			var xD = (state.xCenter - state.mouseX) * impact;
+			var yD = (state.yCenter - state.mouseY) * impact;
 			for (var y = 0; y < cellsHigh; y++) {
 				for (var x = 0; x < cellsWide; x++) {
 					var p1 = grid[y][x];
 					var p2 = grid[y + 1][x + 1];
-
-					ctx.beginPath();
-					ctx.moveTo(p1.x, p1.y);
-					ctx.lineTo(p2.x, p1.y);
-					ctx.lineTo(p2.x, p2.y);
-					ctx.lineTo(p1.x, p2.y);
-					ctx.lineTo(p1.x, p1.y);
-					ctx.stroke();
-					ctx.closePath();
+					drawCurves(ctx, x, y, xD, yD, p1, p2);
 				}
 			}
+		}
 
-			ctx.lineWidth = gridThickness;
-			ctx.strokeStyle = gridColor;
-			for (y = 0; y < cellsHigh; y++) {
-				for (x = 0; x < cellsWide; x++) {
-					var p1 = grid[y][x];
-					var p2 = grid[y + 1][x + 1];
+		function drawCurves(ctx, x, y, xD, yD, p1, p2) {
+			//var xDD = 1; //xD * (x - cellsWideHalf) / cellsWideHalf;
+			//var yDD = 1; //yD * (y - cellsHighHalf) / cellsHighHalf;
+			xD /= 10;
+			yD /= 10;
+			ctx.strokeStyle = '#FFFFFF';
+			ctx.beginPath();
+			ctx.moveTo(p1.x, p1.y);
+			ctx.bezierCurveTo(p2.x + xD, p1.y + yD, p1.x + xD, p2.y + yD, p2.x, p2.y);
+			ctx.stroke();
+			ctx.closePath();
 
-					var xDD = xD * (x - cellsWideHalf) / cellsWideHalf;
-					var yDD = yD * (y - cellsHighHalf) / cellsHighHalf;
-					ctx.beginPath();
-					ctx.moveTo(p1.x + xDD, p1.y + yDD);
-					ctx.bezierCurveTo(p2.x, p1.y, p1.x, p2.y, p2.x + xDD, p2.y + yDD);
-					ctx.stroke();
-					ctx.closePath();
+			ctx.strokeStyle = '#FFFFFF';
+			ctx.beginPath();
+			ctx.moveTo(p1.x, p2.y);
+			ctx.bezierCurveTo(p2.x + xD, p2.y + yD, p1.x + xD, p1.y + yD, p2.x, p1.y);
+			ctx.stroke();
+			ctx.closePath();
 
-					ctx.beginPath();
-					ctx.moveTo(p1.x + xDD, p2.y + yDD);
-					ctx.bezierCurveTo(p2.x, p2.y, p1.x, p1.y, p2.x + xDD, p1.y + yDD);
-					ctx.stroke();
-					ctx.closePath();
-				}
-			}
 		}
 	}
 })();

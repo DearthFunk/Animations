@@ -10,6 +10,7 @@
 
 		var service = {
 			draw: draw,
+			mouseDownEvent: mouseDownEvent,
 			windowResizeEvent: windowResizeEvent
 		};
 
@@ -18,24 +19,34 @@
 		var colorIndex = 0;
 		var rad = 0;
 		var angleSize = 0;
-		var discSlices = 60;
-		var discRows = 10;
+		var discSlices = 70;
+		var discRows = 4;
 		var verticalPadding = 5;
 		var disc = [];
 		var sliceAngles = [];
 		var hoverRow = -1;
 		var hoverSlice = -1;
 		var colorLength = 100;
-		var colorOne = '#FF0000'; //'#AA8639';
-		var colorTwo = '#0000FF'; //'#553A00';
-		var mouseAdjust = 1;
+		var colorOne = genColors.random.hex();
+		var colorTwo = genColors.random.hex();
 
 		return service;
 
 		//////////////////////////////////////////////////
 
+		function mouseDownEvent(e, state) {
+			if (e.button === 2) {
+				colorOne = genColors.random.hex();
+				colorTwo = genColors.random.hex();
+				windowResizeEvent(e, state);
+			}
+		}
+
 		function windowResizeEvent(e, state) {
 			disc = [];
+			sliceAngles = [];
+			hoverRow = -1;
+			hoverSlice = -1;
 			rad = state.h / 2 - (verticalPadding*2);
 			angleSize =  Math.PI * 2 / discSlices;
 			for (var i = 0; i < discRows+2; i++) {
@@ -128,20 +139,18 @@
 					}
 
 					if (sliceIndex === hoverRow && hoverSlice === rowIndex) { // hover cell
-						ctx.lineWidth = 1;
+						ctx.lineWidth = 3;
 						ctx.strokeStyle = '#FFFFFF';
 						ctx.fillStyle = 'rgba(100,100,100,0.5)';
-						ctx.stroke();
-						ctx.fill();
 					}
 					else {
-						ctx.lineWidth = 0.2;
-						ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+						ctx.lineWidth = 1;
+						ctx.strokeStyle = '#444444';
 						ctx.fillStyle = disc[rowIndex].slice[sliceIndex].c[colorIndex];
-						ctx.stroke();
-						ctx.fill();
 					}
 
+					ctx.stroke();
+					ctx.fill();
 					ctx.closePath();
 				}
 			}

@@ -102,7 +102,7 @@
 					input: INPUT_TYPE.NONE
 				},
 				{   name: 'Grid Flow',
-					globalCompositeOperation: 'lighter',
+					globalCompositeOperation: 'lighten',
 					service: gridFlow,
 					msg: '',
 					input: INPUT_TYPE.NONE

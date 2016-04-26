@@ -81,17 +81,21 @@
 			$scope.state.yCenter = $scope.state.h / 2;
 			$scope.state.mainRadius = $scope.state.yCenter;
 			angular.element(cnv).attr({width: $scope.state.w, height: $scope.state.h });
-
+			globalCompositeChange();
 			var anim = animationService.selectedAnimation.service;
+
 			if (angular.isDefined(anim.windowResizeEvent)) {
 				anim.windowResizeEvent(e, $scope.state);
 			}
 		}
 
 		function globalCompositeChange() {
-			ctx.globalCompositeOperation = animationService.selectedAnimation.globalCompositeOperation;
+			if (ctx.globalCompositeOperation !== animationService.selectedAnimation.globalCompositeOperation) {
+				ctx.globalCompositeOperation = animationService.selectedAnimation.globalCompositeOperation;
+				console.log('SET: ',ctx.globalCompositeOperation);
+			}
 		}
-		
+
 		function drawAnimation() {
 			requestAnimationFrame($scope.drawAnimation);
 			animationService.selectedAnimation.service.draw(ctx, $scope.state);
