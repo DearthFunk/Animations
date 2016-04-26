@@ -58,14 +58,14 @@
 		$scope.mouseUpEvent = mouseUpEvent;
 		$scope.mouseDownEvent = mouseDownEvent;
 		$scope.windowResize = windowResize;
-		$scope.globalCompositeChange = globalCompositeChange;
+		$scope.selectedAnimationChnage = selectedAnimationChnage;
 		$scope.animationService = animationService;
 
 		$scope.window.bind('resize', $scope.windowResize);
 		$scope.window.bind('keyup', $scope.keyUpEvent);
 		$scope.window.bind('keydown', $scope.keyDownEvent);
 		$scope.window.bind('mousemove', $scope.mouseMoveEvent);
-		$scope.$watch('animationService.selectedAnimation.globalCompositeOperation', $scope.globalCompositeChange);
+		$scope.$watch('animationService.selectedAnimation.name', $scope.selectedAnimationChnage);
 
 		$scope.windowResize();
 		$scope.drawAnimation();
@@ -81,7 +81,7 @@
 			$scope.state.yCenter = $scope.state.h / 2;
 			$scope.state.mainRadius = $scope.state.yCenter;
 			angular.element(cnv).attr({width: $scope.state.w, height: $scope.state.h });
-			globalCompositeChange();
+			selectedAnimationChnage();
 			var anim = animationService.selectedAnimation.service;
 
 			if (angular.isDefined(anim.windowResizeEvent)) {
@@ -89,7 +89,8 @@
 			}
 		}
 
-		function globalCompositeChange() {
+		function selectedAnimationChnage() {
+			ctx.clearRect(0,0,$scope.state.w, $scope.state.h);
 			if (ctx.globalCompositeOperation !== animationService.selectedAnimation.globalCompositeOperation) {
 				ctx.globalCompositeOperation = animationService.selectedAnimation.globalCompositeOperation;
 			}

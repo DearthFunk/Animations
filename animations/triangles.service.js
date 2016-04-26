@@ -10,18 +10,33 @@
 
 		var service = {
 			draw: draw,
-			drawTriangle: drawTriangle
+			drawTriangle: drawTriangle,
+			mouseDownEvent: mouseDownEvent
 		};
-		var layers = 12;
-		var size = 100;
+		var colors = [];
+		var layers = 10;
+		var size = 50;
 		var numW = 10;
 		var numH = 10;
 		var rotation = 0;
 		var speed = 0.001;
 
+		mouseDownEvent({button:2});
+
 		return service;
 
 		//////////////////////////////////////////////////
+
+		function mouseDownEvent(e) {
+			if(e.button === 2) {
+				colors = genColors.array.rgba(
+					genColors.random.hex(),
+					genColors.random.hex(),
+					layers,
+					0, 1
+				);
+			}
+		}
 
 		function draw(ctx, state) {
 			ctx.clearRect(0,0,state.w, state.h);
@@ -31,21 +46,24 @@
 
 			for (var i = 0; i < layers; i++) {
 				ctx.save();
-				ctx.fillStyle = genColors.convert.rgba('#111111', i/layers);
+				ctx.fillStyle = colors[i];
 				ctx.translate(state.xCenter, state.yCenter);
 				ctx.rotate(rotation * i * (i%2 === 0 ? 1 : -1));
 				ctx.translate(-state.xCenter, -state.yCenter);
 
 				for ( var x = 0; x < numH; x++) {
+					var s = size/x + 10;
 					var xPos = (x * size) + state.xCenter - rectX;
 					for ( var y = 0; y < numW; y++) {
 						var yPos = (y * size)+ state.yCenter - rectY;
 						ctx.beginPath();
 						ctx.moveTo(xPos, yPos);
-						ctx.lineTo(xPos - (size/2), yPos + size);
-						ctx.lineTo(xPos + (size/2), yPos + size);
+						ctx.lineTo(xPos - (s/2), yPos + s);
+						ctx.lineTo(xPos + (s/2), yPos + s);
 						ctx.lineTo(xPos, yPos);
 						ctx.fill();
+						ctx.strokeStyle = '#FFFFFF';
+						ctx.stroke();
 						ctx.closePath();
 					}
 				}

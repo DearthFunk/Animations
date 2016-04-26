@@ -180,8 +180,8 @@
 				{   name: 'Triangles',
 					globalCompositeOperation: 'lighter',
 					service: triangles,
-					msg: 'Triangle grid rotations',
-					input: INPUT_TYPE.NONE
+					msg: 'Right click to change color scheme.',
+					input: INPUT_TYPE.KM
 				},
 				{   name: 'Barcode',
 					globalCompositeOperation: 'source-over',
