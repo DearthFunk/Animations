@@ -93,7 +93,6 @@
 			ctx.lineWidth = 4;
 			for ( i = 0; i < circH.length; i++) {
 				if (circH[i].r > 0) {
-					//console.log(circH[i].x, circH[i].y, circH[i].r, circH[i].x, circH[i].y, 0);
 					var grd = ctx.createRadialGradient(circH[i].x, circH[i].y, circH[i].r, circH[i].x, circH[i].y, 0);
 					ctx.beginPath();
 					ctx.arc(circH[i].x, circH[i].y, circH[i].r, 0, Math.PI*2, false);

@@ -92,7 +92,6 @@
 		function globalCompositeChange() {
 			if (ctx.globalCompositeOperation !== animationService.selectedAnimation.globalCompositeOperation) {
 				ctx.globalCompositeOperation = animationService.selectedAnimation.globalCompositeOperation;
-				console.log('SET: ',ctx.globalCompositeOperation);
 			}
 		}
 

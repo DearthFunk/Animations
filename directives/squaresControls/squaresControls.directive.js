@@ -26,7 +26,6 @@
 
 		function toggle(index){
 			animationService.selectedAnimation.service.rotations[index] = !animationService.selectedAnimation.service.rotations[index];
-			console.log(index, animationService.selectedAnimation.service.rotations[index]);
 		}
 
 	}
