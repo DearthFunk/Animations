@@ -180,7 +180,7 @@
 				{   name: 'Triangles',
 					globalCompositeOperation: 'lighter',
 					service: triangles,
-					msg: 'Right click to change color scheme.',
+					msg: 'Speed is determined by mouse distance from center of screen. Right click to change color scheme.',
 					input: INPUT_TYPE.KM
 				},
 				{   name: 'Barcode',

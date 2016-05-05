@@ -19,7 +19,7 @@
 		var numW = 10;
 		var numH = 10;
 		var rotation = 0;
-		var speed = 0.001;
+		var speed = 0.00001;
 
 		mouseDownEvent({button:2});
 
@@ -40,7 +40,7 @@
 
 		function draw(ctx, state) {
 			ctx.clearRect(0,0,state.w, state.h);
-			rotation += speed;
+			rotation += (speed * state.mouseDistanceFromCenter);
 			var rectX = numW * size /2;
 			var rectY = numH * size /2;
 
