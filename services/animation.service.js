@@ -36,6 +36,7 @@
 		'flower',
 		'fountain',
 		'grid',
+		'generativeLines',
 		'hexMap',
 		'mathMachine',
 		'mountains',
@@ -77,6 +78,7 @@
 		flower,
 		fountain,
 		grid,
+		generativeLines,
 		hexMap,
 		mathMachine,
 		mountains,
@@ -314,12 +316,18 @@
 					service: whirlyParticles,
 					msg: '',
 					input: INPUT_TYPE.MUSIC
+				},
+				{   name: 'Generative Lines',
+					globalCompositeOperation: 'source-over',
+					service: generativeLines,
+					msg: '',
+					input: INPUT_TYPE.KM
 				}
 
 			]
 		};
 
-		service.selectedAnimation = service.animations[1];
+		service.selectedAnimation = service.animations[service.animations.length-1];
 		return service;
 	}
 })();
