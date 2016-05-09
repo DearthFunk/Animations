@@ -17,7 +17,7 @@
 		var lines = [];
 		var totalPoints = 40;
 		var numLines = 60;
-		var numLinesNoColor = 20;
+		var numLinesNoColor = 40;
 		var initialized = false;
 		var flux = 30;
 		var fluxGrowth = 3;
@@ -53,9 +53,9 @@
 				var colors = genColors.array.hex(
 					genColors.random.hex(),
 					genColors.random.hex(),
-					lines.length
+					lines.length - numLinesNoColor
 				);
-				for (var x = 0; x < lines.length; x++) {
+				for (var x = 0; x < lines.length - numLinesNoColor; x++) {
 					lines[x].c = colors[x];
 				}
 			}
@@ -119,8 +119,6 @@
 				ctx.stroke();
 				ctx.closePath();
 			}
-
-
 		}
 	}
 })();

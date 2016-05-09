@@ -320,7 +320,7 @@
 				{   name: 'Generative Lines',
 					globalCompositeOperation: 'source-over',
 					service: generativeLines,
-					msg: '',
+					msg: 'Right Click To Change Color',
 					input: INPUT_TYPE.KM
 				}
 
