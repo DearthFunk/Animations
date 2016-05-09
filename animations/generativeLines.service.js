@@ -22,13 +22,15 @@
 		var flux = 30;
 		var fluxGrowth = 3;
 		var overallSpeed = 4;
+		var mouseHeightImpact = 3;
+		var mouseSpeedImpact = 2;
 
 		return service;
 
 		////////////////////////////////////////////////
 
 		function initialize(state) {
-
+			console.log(state);
 			var spacing = state.w / totalPoints;
 			for (var x = 0; x < numLines; x++) {
 				lines.push({
@@ -85,12 +87,19 @@
 			for (var x = 0; x < lines.length; x++) {
 				line = lines[x];
 				for (var i = 0; i < line.points.length; i++) {
-					var p = line.points[i];
-					if (p.f > line.flux || p.f < -line.flux) {
-						p.speed *= -1;
+					p1 = line.points[i];
+					p2 = line.points[i+1];
+
+					var fluxAtMouse = state.mouseX < p1.x || state.mouseX > p2.x;
+					var flux = fluxAtMouse ? line.flux : line.flux * mouseHeightImpact;
+
+					if ((p1.f >  flux && p1.speed > 0) ||
+						(p1.f < -flux && p1.speed < 0)) {
+						p1.speed *= -1;
 					}
-					p.f += (p.speed * overallSpeed);
-					p.y = state.h/2 + p.f;
+
+					p1.f += (p1.speed * overallSpeed) * (fluxAtMouse ? 1 : mouseSpeedImpact);
+					p1.y = state.h/2 + p1.f;
 				}
 			}
 

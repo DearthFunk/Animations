@@ -320,7 +320,7 @@
 				{   name: 'Generative Lines',
 					globalCompositeOperation: 'source-over',
 					service: generativeLines,
-					msg: 'Right Click To Change Color',
+					msg: 'Right click to change color, and move mouse to change stretch point.',
 					input: INPUT_TYPE.KM
 				}
 
