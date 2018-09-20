@@ -18,6 +18,7 @@
 		'crazyLines',
 		'galaxy',
 		'lineConnections',
+		'lineConnectionsTwo',
 		'redElectricity',
 		'ring',
 		'squares',
@@ -60,6 +61,7 @@
 		crazyLines,
 		galaxy,
 		lineConnections,
+        lineConnectionsTwo,
 		redElectricity,
 		ring,
 		squares,
@@ -101,6 +103,12 @@
 					msg: 'N/A',
 					input: INPUT_TYPE.NONE
 				},
+                {   name: 'Line Connections 2 - (sphere)',
+                    globalCompositeOperation: 'lighter',
+                    service: lineConnectionsTwo,
+                    msg: 'Move Mouse Around Slowly, Click To Reset!',
+                    input: INPUT_TYPE.KM
+                },
 				{   name: 'Line Clusters',
 					globalCompositeOperation: 'lighter',
 					service: lineClusters,
@@ -327,7 +335,7 @@
 			]
 		};
 
-		service.selectedAnimation = service.animations[service.animations.length-1];
+		service.selectedAnimation = service.animations[1];
 		return service;
 	}
 })();
