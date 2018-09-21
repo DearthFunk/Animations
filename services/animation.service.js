@@ -49,7 +49,8 @@
 		'sunAndClouds',
 		'tunnel',
 		'whirlyParticles',
-		'lineClusters'
+		'lineClusters',
+		'lineConnectionsThree'
 	];
 
 	function animationService(
@@ -92,7 +93,8 @@
 		sunAndClouds,
 		tunnel,
 		whirlyParticles,
-		lineClusters
+		lineClusters,
+        lineConnectionsThree
 	){
 		var service =  {
 			selectedAnimation: -1,
@@ -103,9 +105,15 @@
 					msg: 'N/A',
 					input: INPUT_TYPE.NONE
 				},
-                {   name: 'Line Connections 2 - (sphere)',
+                {   name: 'Line Connections 2 - (funnel)',
                     globalCompositeOperation: 'lighter',
                     service: lineConnectionsTwo,
+                    msg: 'Move Mouse Around Slowly, Click To Reset!',
+                    input: INPUT_TYPE.KM
+                },
+                {   name: 'Line Connections 3 - (push)',
+                    globalCompositeOperation: 'lighter',
+                    service: lineConnectionsThree,
                     msg: 'Move Mouse Around Slowly, Click To Reset!',
                     input: INPUT_TYPE.KM
                 },

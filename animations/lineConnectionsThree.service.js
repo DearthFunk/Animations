@@ -2,11 +2,11 @@
 	'use strict';
 	angular
 		.module('animations')
-		.factory('lineConnectionsTwo', lineConnectionsTwo);
+		.factory('lineConnectionsThree', lineConnectionsThree);
 
-    lineConnectionsTwo.inject = [];
+    lineConnectionsThree.inject = [];
 
-	function lineConnectionsTwo() {
+	function lineConnectionsThree() {
 
 		var service = {
 			mouseDownEvent: mouseDownEvent,
@@ -15,11 +15,11 @@
 
         var lineFlux = 50;
 		var initialized = false;
-        var twoPI = Math.PI * 2;
+        var ThreePI = Math.PI * 2;
 		var galaxyStars = [];
 		var galaxyTotalStars = 700;
-		var speed = 0.7;
-		var mouseDrawRadius = 300;
+		var speed = 0.5;
+		var mouseDrawRadius = 100;
 
 		return service;
 
@@ -30,17 +30,18 @@
             galaxyStars = [];
 		}
 
-		function newStar(state, comInFromEdgeOfScreen){
-            return {
+		function newStar(state, comingInFromEdge){
+		    var speedAdjust = comingInFromEdge ? 5 : 0;
+		    var star = {
                 x: Math.random() * state.w,
-				y: Math.random() * state.h,
-                dx: Math.random() * speed * (Math.random() >= 0.5 ? -1 : 1),
-                dy: Math.random() * speed * (Math.random() >= 0.5 ? -1 : 1),
+                y: Math.random() * state.h,
+                dx: Math.random() * (speed + speedAdjust) * (Math.random() >= 0.5 ? -1 : 1),
+                dy: Math.random() * (speed + speedAdjust) * (Math.random() >= 0.5 ? -1 : 1),
                 vx: 0, //velocity to be used in mouseDraw
                 vy: 0, //velocity to be used in mouseDraw
-                size: Math.random() + 0.01,
-				color: (Math.random() >= 0.5) ? '#FFFF00' : '#FFFFFF'
-            }
+                size: Math.random() + 0.01
+            };
+            return star;
 		}
 
 		function initializeDots(state){
@@ -52,14 +53,13 @@
 
 		function draw(ctx, state) {
 			if (!initialized) { initializeDots(state); }
-
-			// draw dots
 			ctx.clearRect(0,0,state.w, state.h);
 
+            // draw dots
             var p1 = galaxyStars[0];
 			for (var i = 0; i < galaxyStars.length; i++) {
 				var star = galaxyStars[i];
-                ctx.fillStyle = star.color;
+                ctx.fillStyle = '#FFFFFF';
 				var drawStar = true;
                 var d = Math.sqrt( Math.pow(p1.x - star.x, 2) + Math.pow(p1.y - star.y, 2) );
 
@@ -70,17 +70,12 @@
                 }
                 //star is within the radius of effect
                 else if (d < mouseDrawRadius) {
-                    var speedAdjust = mouseDrawRadius * 0.005 - ((mouseDrawRadius - d) * 0.0003);
-                	var dx = (p1.x - star.x) / d * speedAdjust;
-                	var dy = (p1.y - star.y) / d * speedAdjust;
-
+                    var speedAdjust = mouseDrawRadius - d;
+                    star.x += star.dx * speedAdjust;
+                    star.y += star.dy * speedAdjust;
                 	if (d < 5){
                         galaxyStars[i] = newStar(state, true);
 						drawStar = false;
-					}
-					else {
-                        star.x += dx;
-                        star.y += dy;
 					}
 				}
 				//normal star
@@ -93,7 +88,7 @@
 
                 if (drawStar) {
                     ctx.beginPath();
-                    ctx.arc(star.x, star.y, star.size, 0, twoPI, true);
+                    ctx.arc(star.x, star.y, star.size, 0, ThreePI, true);
                     ctx.fill();
                     ctx.closePath();
 
