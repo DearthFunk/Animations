@@ -11,6 +11,9 @@
 			restrict: 'A',
 			replace: true,
 			templateUrl: 'directives/song/song.directive.html',
+			scope: {
+				track: '=track'
+			},
 			link: linkFunction
 		};
 		return directive;
@@ -22,10 +25,10 @@
 			var movingMarker = false;
 			scope.playLinePosition = 0;
 
-			var visCnv = element[0].children[1].children[1].children[0].children[2];
+			var visCnv = element[0].querySelector('#songCanvas');
 			scope.visCtx = visCnv.getContext('2d');
 
-			var imgContainer = element[0].children[1].children[1].children[0];
+			var imgContainer = element[0].querySelector('.imgContainer');
 			scope.imgSize = imgContainer.getBoundingClientRect();
 			visCnv.style.width = scope.imgSize.width + 'px';
 			visCnv.style.height = scope.imgSize.height + 'px';
@@ -54,7 +57,6 @@
 				scope.track.codec = 'mp3';
 				scope.track.type = 'audio/mp3';
 				scope.track.addEventListener('canplay', scope.trackCanPlay);
-
 			}
 
 			function trackCanPlay() {
@@ -62,14 +64,6 @@
 				scope.track.source.connect(audioService.nodeSplitter);
 				scope.track.source.connect(audioService.ctx.destination);
 				scope.track.removeEventListener('canplay', scope.trackCanPlay);
-				console.log(scope.track.source);
-				scope.track.addEventListener('loadedmetadata', function (ev) {
-					console.log(scope.track.duration);
-				});
-				scope.track.addEventListener('loadeddata',() => {
-					console.log(scope.track.duration); // the duration variable now holds the duration (in seconds) of the audio clip
-			});
-
 				audioService.songDrawCallback = scope.drawVisualizer;
 			}
 
@@ -89,15 +83,11 @@
 				scope.window.bind('mousemove', scope.mouseMoveEvent);
 				if (e) { e.preventDefault(); }
 				if (e.which === 1) {
-					console.log('in');
 					if (scope.track.paused) {
-						console.log('playpause called')
 						scope.playPause();
 					}
 					movingMarker = true;
-					console.log(e.pageX, scope.imgSize.left, scope.imgSize.width, scope.track);
 					scope.track.currentTime = (e.pageX - scope.imgSize.left) / scope.imgSize.width * scope.track.duration;
-					console.log(scope.track.currentTime);
 				}
 			}
 

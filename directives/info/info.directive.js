@@ -21,6 +21,7 @@
 
 		$scope.animationService = animationService;
 		$scope.INPUT_TYPE = INPUT_TYPE;
+		$scope.track = {};
 
 	}
 })();

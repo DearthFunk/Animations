@@ -1,17 +1,17 @@
 (function(){
+	'use strict';
 	angular
 		.module('animations')
-		.directive('sliderVertical', sliderVertical);
+		.directive('sliderHorizontal', sliderHorizontal);
 
-	sliderVertical.$inject = [];
-	function sliderVertical() {
+	sliderHorizontal.$inject = [];
+	function sliderHorizontal() {
 		return {
-			restrict: 'C',
-			templateUrl: 'elements/sliderVertical/sliderVertical.html',
+			restrict: 'A',
+			templateUrl: 'directives/sliderHorizontal/sliderHorizontal.directive.html',
 			replace: true,
 			scope: {
-				sliderValue: "=sliderValue",
-				callBack: "=callBack"
+				sliderValue: '=sliderValue'
 			},
 			link: linkFunction
 		};
@@ -20,11 +20,12 @@
 
 		function linkFunction(scope, element) {
 
-			scope.height = element[0].getBoundingClientRect().height;
-			var sliding, startY, originalY, newValue;
+			var sliding, startX, originalX, newValue;
 			var lastValue = scope.sliderValue;
 			var startingValue = scope.sliderValue;
 			var xMin = 0;
+
+			scope.width = element[0].getBoundingClientRect().width;
 
 			scope.getSliderValue = getSliderValue;
 			scope.resetToOriginal = resetToOriginal;
@@ -47,20 +48,18 @@
 
 			function resetToOriginal() {
 				scope.sliderValue = startingValue;
-				scope.callBack.toRun(1);
 			}
 
 			function startMovingSlider(event) {
 				sliding = true;
-				startY = event.clientY;
-				newValue = parseInt(scope.sliderValue * scope.height);
-				originalY = newValue;
+				startX = event.clientX;
+				newValue = parseInt(scope.sliderValue * scope.width);
+				originalX = newValue;
 			}
 
 			function movePos(e) {
 				if (sliding) { return; }
-				scope.sliderValue = (e.clientY - element[0].getBoundingClientRect().top) / scope.height;
-				scope.callBack.toRun(1 - (roundedNumber(scope.sliderValue, 1)));
+				scope.sliderValue = (e.clientX - element[0].getBoundingClientRect().top) / scope.width;
 				scope.startMovingSlider(e);
 			}
 
@@ -70,22 +69,21 @@
 
 			function mouseMoveEvent(event, args) {
 				if (!sliding) { return; }
-				var newLeft = originalY - startY + args.clientY;
+				var newLeft = originalX - startX + args.clientX;
 
 				if (newLeft < xMin) {
 					newLeft = xMin;
 					scope.sliderValue = 0;
 				}
-				if (newLeft > scope.height) {
-					newLeft = scope.height;
+				if (newLeft > scope.width) {
+					newLeft = scope.width;
 					scope.sliderValue = 1;
 				}
 				newValue = newLeft;
 
 				//prevents calling action when the value does not change
-				if (lastValue != newValue) {
-					scope.sliderValue = ((newValue - xMin) / (scope.height - xMin));
-					scope.callBack.toRun(1 - (roundedNumber(scope.sliderValue, 1)));
+				if (lastValue !== newValue) {
+					scope.sliderValue = ((newValue - xMin) / (scope.width - xMin));
 					lastValue = newValue;
 				}
 			}

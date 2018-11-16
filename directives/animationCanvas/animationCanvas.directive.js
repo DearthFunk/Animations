@@ -124,7 +124,6 @@
 		}
 
 		function keyDownEvent(e) {
-			console.log(e);
 			var anim = animationService.selectedAnimation.service;
 			if (anim && angular.isDefined(anim.keyDownEvent)) {
 				anim.keyDownEvent(e.which || e.keyCode, $scope.state);

@@ -1,8 +1,6 @@
 <div class="infoContainer">
-
-	<div slider-vertical ></div>
-	<div data-song></div>
-
+	<div data-song data-track="track"></div>
+	<div slider-horizontal data-slider-value="track.volume"></div>
 	<div class="message" data-ng-show="animationService.selectedAnimation.input !== INPUT_TYPE.MUSIC">
 		INFO: {{animationService.selectedAnimation.msg}}
 		<div data-squares-controls data-ng-if="animationService.selectedAnimation.name === 'Squares'"></div>
