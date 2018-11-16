@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 	angular
-		.module('menu',[])
+		.module('animations')
 		.directive('menu', menu);
 
 	function menu() {

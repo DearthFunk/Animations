@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 	angular
-		.module('audio', [])
+		.module('animations')
 		.factory('audioService', audioService);
 
 	audioService.$inject = [];

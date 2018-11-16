@@ -1,0 +1,25 @@
+div.verticalBarContainer {
+    cursor: pointer;
+    width: 23px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+}
+div.verticalBarContainer > div.verticalBar {
+    width: 5px;
+    display: inline-block;
+    margin: 0 10px;
+    height: 100%;
+    background-color: #BBBBBB;
+}
+div.verticalBarContainer > div.verticalBar > div.sliderThumbContainer{
+    height: 7px;
+    width: 18px;
+    position: relative;
+    left: -6px;
+    background-color: #FFFFFF;
+}
+div.verticalBarContainer > div.verticalBar > div.sliderThumbContainer > div.sliderThumb {
+    width: 100%;
+    height: 100%;
+}

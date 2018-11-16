@@ -22,20 +22,19 @@
 		'$scope',
 		'$element',
 		'$window',
-		'animationService',
-		'audioService'
+		'animationService'
 	];
 
 	function animationCanvasController(
 		$scope,
 		$element,
 		$window,
-		animationService,
-		audioService
+		animationService
 	) {
 
 		var cnv = $element[0];
 		var ctx = cnv.getContext('2d');
+		ctx.save();
 
 		$scope.state = {
 			w: 0,
@@ -58,14 +57,14 @@
 		$scope.mouseUpEvent = mouseUpEvent;
 		$scope.mouseDownEvent = mouseDownEvent;
 		$scope.windowResize = windowResize;
-		$scope.selectedAnimationChnage = selectedAnimationChnage;
+		$scope.selectedAnimationChange = selectedAnimationChange;
 		$scope.animationService = animationService;
 
 		$scope.window.bind('resize', $scope.windowResize);
 		$scope.window.bind('keyup', $scope.keyUpEvent);
 		$scope.window.bind('keydown', $scope.keyDownEvent);
 		$scope.window.bind('mousemove', $scope.mouseMoveEvent);
-		$scope.$watch('animationService.selectedAnimation.name', $scope.selectedAnimationChnage);
+		$scope.$watch('animationService.selectedAnimation.name', $scope.selectedAnimationChange);
 
 		$scope.windowResize();
 		$scope.drawAnimation();
@@ -81,7 +80,7 @@
 			$scope.state.yCenter = $scope.state.h / 2;
 			$scope.state.mainRadius = $scope.state.yCenter;
 			angular.element(cnv).attr({width: $scope.state.w, height: $scope.state.h });
-			selectedAnimationChnage();
+			selectedAnimationChange();
 			var anim = animationService.selectedAnimation.service;
 
 			if (angular.isDefined(anim.windowResizeEvent)) {
@@ -89,7 +88,9 @@
 			}
 		}
 
-		function selectedAnimationChnage() {
+		function selectedAnimationChange() {
+			ctx.restore();
+			ctx.save();
 			ctx.clearRect(0,0,$scope.state.w, $scope.state.h);
 			if (ctx.globalCompositeOperation !== animationService.selectedAnimation.globalCompositeOperation) {
 				ctx.globalCompositeOperation = animationService.selectedAnimation.globalCompositeOperation;
@@ -123,16 +124,17 @@
 		}
 
 		function keyDownEvent(e) {
+			console.log(e);
 			var anim = animationService.selectedAnimation.service;
 			if (anim && angular.isDefined(anim.keyDownEvent)) {
-				anim.keyDownEvent(e.keyCode, $scope.state);
+				anim.keyDownEvent(e.which || e.keyCode, $scope.state);
 			}
 		}
 
 		function keyUpEvent(e) {
 			var anim = animationService.selectedAnimation.service;
 			if (anim && angular.isDefined(anim.keyUpEvent)) {
-				anim.keyUpEvent(e.keyCode, $scope.state);
+				anim.keyUpEvent(e.which || e.keyCode, $scope.state);
 			}
 		}
 

@@ -1,12 +1,7 @@
 (function () {
 	'use strict';
 	angular
-		.module('dearthFunkAnimations', [
-			'genColors',
-			'animations',
-			'menu',
-			'audio'
-		])
+		.module('animations', ['genColors'])
 		.controller('animationsController', animationsController);
 
 	animationsController.$inject = [];

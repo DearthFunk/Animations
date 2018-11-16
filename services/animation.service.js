@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 	angular
-		.module('animations', [])
+		.module('animations')
 		.factory('animationService', animationService)
 		.constant('INPUT_TYPE',{
 			MUSIC: 1,
@@ -105,13 +105,13 @@
 					msg: 'N/A',
 					input: INPUT_TYPE.NONE
 				},
-                {   name: 'Line Connections 2 - (funnel)',
+                {   name: 'Line Connection funnel',
                     globalCompositeOperation: 'lighter',
                     service: lineConnectionsTwo,
                     msg: 'Move Mouse Around Slowly, Click To Reset!',
                     input: INPUT_TYPE.KM
                 },
-                {   name: 'Line Connections 3 - (push)',
+                {   name: 'Line Connection push',
                     globalCompositeOperation: 'lighter',
                     service: lineConnectionsThree,
                     msg: 'Move Mouse Around Slowly, Click To Reset!',

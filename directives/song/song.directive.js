@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 	angular
-		.module('audio')
+		.module('animations')
 		.directive('song', song);
 
 	song.$inject = ['audioService', '$window'];
@@ -45,12 +45,16 @@
 			////////////////////////////////////////////////////////////
 
 			function setUpTrack() {
-				scope.track = new Audio('media/7.mp3');
+				scope.track = document.createElement('audio');
+				scope.track.style.display = "none";
+				scope.track.src = 'media/7.mp3';
+
 				scope.track.preload = 'metadata';
 				scope.track.playable = false;
 				scope.track.codec = 'mp3';
 				scope.track.type = 'audio/mp3';
 				scope.track.addEventListener('canplay', scope.trackCanPlay);
+
 			}
 
 			function trackCanPlay() {
@@ -58,6 +62,14 @@
 				scope.track.source.connect(audioService.nodeSplitter);
 				scope.track.source.connect(audioService.ctx.destination);
 				scope.track.removeEventListener('canplay', scope.trackCanPlay);
+				console.log(scope.track.source);
+				scope.track.addEventListener('loadedmetadata', function (ev) {
+					console.log(scope.track.duration);
+				});
+				scope.track.addEventListener('loadeddata',() => {
+					console.log(scope.track.duration); // the duration variable now holds the duration (in seconds) of the audio clip
+			});
+
 				audioService.songDrawCallback = scope.drawVisualizer;
 			}
 
@@ -77,11 +89,15 @@
 				scope.window.bind('mousemove', scope.mouseMoveEvent);
 				if (e) { e.preventDefault(); }
 				if (e.which === 1) {
+					console.log('in');
 					if (scope.track.paused) {
+						console.log('playpause called')
 						scope.playPause();
 					}
 					movingMarker = true;
+					console.log(e.pageX, scope.imgSize.left, scope.imgSize.width, scope.track);
 					scope.track.currentTime = (e.pageX - scope.imgSize.left) / scope.imgSize.width * scope.track.duration;
+					console.log(scope.track.currentTime);
 				}
 			}
 
