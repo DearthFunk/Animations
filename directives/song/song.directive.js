@@ -2,17 +2,18 @@
 	'use strict';
 	angular
 		.module('animations')
-		.directive('song', song);
+		.directive('song', song)
+		.constant('STARTING_VOLUME', 0.2);
 
-	song.$inject = ['audioService', '$window'];
+	song.$inject = ['audioService', '$window', 'genColors', '$timeout', 'STARTING_VOLUME'];
 	
-	function song(audioService, $window) {
+	function song(audioService, $window, genColors, $timeout, STARTING_VOLUME) {
 		var directive = {
 			restrict: 'A',
 			replace: true,
 			templateUrl: 'directives/song/song.directive.html',
 			scope: {
-				track: '=track'
+				trackVolume: '='
 			},
 			link: linkFunction
 		};
@@ -23,17 +24,11 @@
 		function linkFunction(scope, element) {
 
 			var movingMarker = false;
-			scope.playLinePosition = 0;
-
 			var visCnv = element[0].querySelector('#songCanvas');
-			scope.visCtx = visCnv.getContext('2d');
-
 			var imgContainer = element[0].querySelector('.imgContainer');
-			scope.imgSize = imgContainer.getBoundingClientRect();
-			visCnv.style.width = scope.imgSize.width + 'px';
-			visCnv.style.height = scope.imgSize.height + 'px';
-			angular.element(visCnv).attr({width: scope.imgSize.width, height: scope.imgSize.height});
 
+			scope.visCtx = visCnv.getContext('2d');
+			scope.playLinePosition = 0;
 			scope.window = angular.element($window);
 			scope.playPause = playPause;
 			scope.mouseDownEvent = mouseDownEvent;
@@ -42,10 +37,21 @@
 			scope.setUpTrack = setUpTrack;
 			scope.drawVisualizer = drawVisualizer;
 			scope.trackCanPlay = trackCanPlay;
+			scope.adjustVolume = adjustVolume;
 
-			scope.setUpTrack();
+			$timeout(function(){
+				scope.imgSize = imgContainer.getBoundingClientRect();
+				visCnv.style.width = scope.imgSize.width + 'px';
+				visCnv.style.height = scope.imgSize.height + 'px';
+				angular.element(visCnv).attr({width: scope.imgSize.width, height: scope.imgSize.height});
+				scope.setUpTrack();
+			});
 
 			////////////////////////////////////////////////////////////
+
+			function adjustVolume(){
+				scope.track.volume = genColors.get.roundedNumber(scope.trackVolume, 2);
+			}
 
 			function setUpTrack() {
 				scope.track = document.createElement('audio');
@@ -57,6 +63,8 @@
 				scope.track.codec = 'mp3';
 				scope.track.type = 'audio/mp3';
 				scope.track.addEventListener('canplay', scope.trackCanPlay);
+				scope.track.volume = STARTING_VOLUME;
+				scope.$watch('trackVolume', scope.adjustVolume);
 			}
 
 			function trackCanPlay() {

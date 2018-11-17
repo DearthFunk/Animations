@@ -30,7 +30,7 @@
 		////////////////////////////////////////////////
 
 		function initialize(state) {
-``			var spacing = state.w / totalPoints;
+			var spacing = state.w / totalPoints;
 			for (var x = 0; x < numLines; x++) {
 				lines.push({
 					points: [],

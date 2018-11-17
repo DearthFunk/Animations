@@ -15,13 +15,12 @@
 		return directive;
 	}
 
-	infoController.$inject = ['$scope', 'animationService', 'INPUT_TYPE'];
+	infoController.$inject = ['$scope', 'animationService', 'INPUT_TYPE', 'STARTING_VOLUME'];
 
-	function infoController($scope, animationService, INPUT_TYPE) {
+	function infoController($scope, animationService, INPUT_TYPE, STARTING_VOLUME) {
 
 		$scope.animationService = animationService;
 		$scope.INPUT_TYPE = INPUT_TYPE;
-		$scope.track = {};
-
+		$scope.trackVolume = STARTING_VOLUME;
 	}
 })();
