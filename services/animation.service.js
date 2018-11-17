@@ -111,7 +111,7 @@
                     msg: 'Move Mouse Around Slowly, Click To Reset!',
                     input: INPUT_TYPE.KM
                 },
-                {   name: 'Line Connection push',
+                {   name: 'Line Connection warp',
                     globalCompositeOperation: 'lighter',
                     service: lineConnectionsThree,
                     msg: 'Move Mouse Around Slowly, Click To Reset!',

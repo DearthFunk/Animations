@@ -14,13 +14,13 @@
 		};
 
 		var galaxyStars = [];
-		var galaxyTotalStars = 450;
+		var galaxyTotalStars = 350;
 		var lineFlux = 100;
-		var orbitFlux = 300;
-		var screenPadding = 300;
+		var orbitFlux = 100;
+		var screenPadding = 100;
 		var mainColor = '#FF0000';
-		var oddsOfWhiteLine = 5;
-		var oddsOfBlueLine = 10;
+		var oddsOfWhiteLine = 15;
+		var oddsOfBlueLine = 20;
 
 		for (var i = 0; i < galaxyTotalStars; i++) {
 			galaxyStars.push({
@@ -45,8 +45,8 @@
 			//partial erase
 			var oldArray = ctx.getImageData(0,0,state.w,state.h);
 			for(var d=3;d<oldArray.data.length;d+=4){ //count through only the alpha pixels
-				//dim it with some feedback, I'm using .9
-				oldArray.data[d] = Math.floor(oldArray.data[d]*.85);
+				//dim it with some feedback
+				oldArray.data[d] = Math.floor(oldArray.data[d]*.7);
 			}
 			ctx.putImageData(oldArray,0,0);
 

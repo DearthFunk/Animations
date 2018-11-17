@@ -20,7 +20,7 @@
 		var hPadding = 460;
 		var wPadding = 160;
 		var lineFlux = 120;
-		var dotRadiusDecay = 0.3;
+		var dotRadiusDecay = 0.2;
 
 		setup();
 		mouseDownEvent({button: 2});

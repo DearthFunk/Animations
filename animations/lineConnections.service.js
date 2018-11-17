@@ -14,7 +14,7 @@
 		};
 
 		var galaxyStars = [];
-		var galaxyTotalStars = 700;
+		var galaxyTotalStars = 400;
 		var lineFlux = 50;
 		var orbitFlux = 100;
 		var speed = 0.03;
