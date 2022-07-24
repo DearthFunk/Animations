@@ -1,0 +1,67 @@
+div.songContainer {
+    width: 100%;
+    margin-bottom: 3px;
+    text-align: left;
+	> div.songTitle {
+		font-size: 14px;
+		text-align: center;
+		line-height: 10px;
+		margin-bottom: 2px;
+	}
+	> div.songRow {
+		> div.playButton {
+			background-size: 100% 100%;
+			width: 20px;
+			height: 20px;
+			display: inline-block;
+			cursor: pointer;
+			margin-top: 5px;
+			vertical-align: top;
+			border-radius: 2px;
+			&:hover {
+				background-color: #777777;
+			}
+
+		}
+		> div.imgContainer {
+			display: inline-block;
+			height: 30px;
+			width: 155px;
+			border-top: 1px solid #FFFFFF;
+			border-bottom: 1px solid #FFFFFF;
+			box-sizing: border-box;
+			text-align: center;
+			padding: 0 5px;
+			> div.inner {
+				width: 100%;
+				height: 100%;
+				position: relative;
+				> canvas {
+					position: absolute;
+					top: 0;
+					left: 0;
+				}
+				> i {
+					font-size: 40px;
+					margin-top: 15px;
+					position: absolute;
+					left: 50%;
+					color: #FF0000;
+				}
+				> img {
+					width: 100%;
+					height: 100%;
+					background-color: rgba(0,0,0,0.4);
+				}
+				> div.playLine {
+					background-color: #FF0000;
+					width: 2px;
+					height: 100%;
+					position: absolute;
+					top: 0;
+					z-index: 1;
+				}
+			}
+		}
+	}
+}

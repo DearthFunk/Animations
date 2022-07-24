@@ -1,0 +1,16 @@
+<div class="songContainer">
+    <div class="songTitle">Dearth Funk<br><i>Retribution ( alt drum mix )</i></div>
+    <div class="songRow">
+        <div data-ng-click="playPause()"
+            class="playButton"
+            data-ng-style="{backgroundImage: track.paused ? 'url(media/play_button.png)' : 'url(media/pause_button.png)'}">
+        </div>
+        <div class="imgContainer" data-ng-mousedown="mouseDownEvent($event)">
+            <div class="inner">
+                <div class="playLine" data-ng-style="{left: playLinePosition + '%'}"></div>
+                <img src="media/7.png">
+                <canvas id="songCanvas"></canvas>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="horizontalBarContainer"
+	data-ng-mousedown="movePos($event)"
+	data-ng-style="{width: width + 'px'}">
+	<div class="volume">VOLUME</div>
+    <div class="horizontalBar">
+        <div class="sliderThumbContainer"
+            data-ng-style="{left: (getSliderValue() * (width-7)) + 'px'}"
+            data-ng-mousedown="startMovingSlider($event)"
+            data-ng-dblclick="resetToOriginal()">
+            <div class="sliderThumb"></div>
+        </div>
+    </div>
+</div>

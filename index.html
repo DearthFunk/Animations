@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html data-ng-app="animations" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta name="description" content="Dearth Funk, music and web applications.">
+    <meta name="keywords" content="Dearth, Funk, DearthFunk, Djangular, D'Jangular, Colonies, Hexsynth, Hex Synth, Hex">
+    <meta name="author" content="Dearth Funk aka. Tylor Spence">
+
+    <title>Dearth Funk!</title>
+<!-- _____          ___           ___           ___                       ___                    ___         ___           ___           ___
+    /  /::\        /  /\         /  /\         /  /\          ___        /__/\                  /  /\       /__/\         /__/\         /__/|
+   /  /:/\:\      /  /:/_       /  /::\       /  /::\        /  /\       \  \:\                /  /:/_      \  \:\        \  \:\       |  |:|
+  /  /:/  \:\    /  /:/ /\     /  /:/\:\     /  /:/\:\      /  /:/        \__\:\              /  /:/ /\      \  \:\        \  \:\      |  |:|
+ /__/:/ \__\:|  /  /:/ /:/_   /  /:/~/::\   /  /:/~/:/     /  /:/     ___ /  /::\            /  /:/ /:/  ___  \  \:\   _____\__\:\   __|  |:|
+ \  \:\ /  /:/ /__/:/ /:/ /\ /__/:/ /:/\:\ /__/:/ /:/___  /  /::\    /__/\  /:/\:\          /__/:/ /:/  /__/\  \__\:\ /__/::::::::\ /__/\_|:|____
+  \  \:\  /:/  \  \:\/:/ /:/ \  \:\/:/__\/ \  \:\/:::::/ /__/:/\:\   \  \:\/:/__\/          \  \:\/:/   \  \:\ /  /:/ \  \:\~~\~~\/ \  \:\/:::::/
+   \  \:\/:/    \  \::/ /:/   \  \::/       \  \::/~~~~  \__\/  \:\   \  \::/                \  \::/     \  \:\  /:/   \  \:\  ~~~   \  \::/~~~~
+    \  \::/      \  \:\/:/     \  \:\        \  \:\           \  \:\   \  \:\                 \  \:\      \  \:\/:/     \  \:\        \  \:\
+     \__\/        \  \::/       \  \:\        \  \:\           \__\/    \  \:\                 \  \:\      \  \::/       \  \:\        \  \:\
+                   \__\/         \__\/         \__\/                     \__\/                  \__\/       \__\/         \__\/         \__\/  -->
+    <!-- libraries ---------------------------------->
+		<script type="text/javascript" src="lib/angular.js"></script>
+    <!-- main ---------------------------------->
+        <script type="text/javascript" src="app.controller.js"></script>
+    <!-- services ------------------------------->
+        <script type="text/javascript" src="services/animation.service.js"></script>
+        <script type="text/javascript" src="services/audio.service.js"></script>
+        <script type="text/javascript" src="services/genColors.service.js"></script>
+    <!-- directives ------------------------------->
+        <script type="text/javascript" src="directives/animationCanvas/animationCanvas.directive.js"></script>
+        <script type="text/javascript" src="directives/song/song.directive.js"></script>
+        <script type="text/javascript" src="directives/menu/menu.directive.js"></script>
+        <script type="text/javascript" src="directives/info/info.directive.js"></script>
+        <script type="text/javascript" src="directives/squaresControls/squaresControls.directive.js"></script>
+        <script type="text/javascript" src="directives/sliderHorizontal/sliderHorizontal.directive.js"></script>
+	<!-- animations ------------------------------------>
+		<script type="text/javascript" src="animations/bubbles.service.js"></script>
+		<script type="text/javascript" src="animations/circles.service.js"></script>
+		<script type="text/javascript" src="animations/crazy.service.js"></script>
+		<script type="text/javascript" src="animations/crazyLines.service.js"></script>
+		<script type="text/javascript" src="animations/galaxy.service.js"></script>
+		<script type="text/javascript" src="animations/lineConnections.service.js"></script>
+		<script type="text/javascript" src="animations/lineConnectionsTwo.service.js"></script>
+		<script type="text/javascript" src="animations/lineConnectionsThree.service.js"></script>
+		<script type="text/javascript" src="animations/lineClusters.service.js"></script>
+		<script type="text/javascript" src="animations/redElectricity.service.js"></script>
+		<script type="text/javascript" src="animations/disc.service.js"></script>
+		<script type="text/javascript" src="animations/ring.service.js"></script>
+		<script type="text/javascript" src="animations/squares.service.js"></script>
+		<script type="text/javascript" src="animations/triangles.service.js"></script>
+		<script type="text/javascript" src="animations/freqScope.service.js"></script>
+		<script type="text/javascript" src="animations/stopper.service.js"></script>
+		<script type="text/javascript" src="animations/tracer.service.js"></script>
+        <script type="text/javascript" src="animations/barcode.service.js"></script>
+        <script type="text/javascript" src="animations/bars.service.js"></script>
+        <script type="text/javascript" src="animations/bumps.service.js"></script>
+        <script type="text/javascript" src="animations/circleMountain.service.js"></script>
+        <script type="text/javascript" src="animations/circleSpread.service.js"></script>
+        <script type="text/javascript" src="animations/circleSides.service.js"></script>
+        <script type="text/javascript" src="animations/circleThreads.service.js"></script>
+        <script type="text/javascript" src="animations/downwardSpiral.service.js"></script>
+        <script type="text/javascript" src="animations/flower.service.js"></script>
+        <script type="text/javascript" src="animations/fountain.service.js"></script>
+        <script type="text/javascript" src="animations/grid.service.js"></script>
+        <script type="text/javascript" src="animations/generativeLines.service.js"></script>
+        <script type="text/javascript" src="animations/hexMap.service.js"></script>
+        <script type="text/javascript" src="animations/mathMachine.service.js"></script>
+        <script type="text/javascript" src="animations/mountains.service.js"></script>
+        <script type="text/javascript" src="animations/whirlyParticles.service.js"></script>
+        <script type="text/javascript" src="animations/particleRing.service.js"></script>
+        <script type="text/javascript" src="animations/rectangleBlur.service.js"></script>
+        <script type="text/javascript" src="animations/spinner.service.js"></script>
+        <script type="text/javascript" src="animations/spiralGalaxy.service.js"></script>
+        <script type="text/javascript" src="animations/squareJumble.service.js"></script>
+        <script type="text/javascript" src="animations/sunAndClouds.service.js"></script>
+        <script type="text/javascript" src="animations/tunnel.service.js"></script>
+
+	<!-- styles ------------------------------->
+		<link rel="stylesheet/less" href="app.less">
+		<script type="text/javascript" src="lib/less.js"></script>
+
+</head>
+<body data-ng-controller="animationsController">
+    <div data-menu></div>
+    <div data-info></div>
+    <div data-animation-canvas></div>
+</body>
+</html>
